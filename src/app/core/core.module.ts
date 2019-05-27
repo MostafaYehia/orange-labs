@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Modules
-import { AppRoutingModule } from './app-routing.module';
+import { CoreRoutingModule } from './core-routing.module';
 
 // Containers
 import { AppComponent } from './app.component';
@@ -15,7 +15,8 @@ import { LandingPageComponent } from './containers/landing-page/landing-page.com
 import { NavabarComponent } from './components/navabar/navabar.component';
 import { SlideShowComponent } from './components/slide-show/slide-show.component';
 import { SlideShowItemComponent } from './components/slide-show/slide-show-item.component';
-import { LoginSignupComponent } from './components/login-signup/login-signup.component';
+import { LoginSignupComponent } from '../auth/components/login-signup/login-signup.component';
+
 // Components
 
 const COMPONENTS = [
@@ -34,8 +35,8 @@ const COMPONENTS = [
   declarations: [COMPONENTS],
   imports: [
     CommonModule,
-    AppRoutingModule
+    CoreRoutingModule
   ],
-  exports: [...COMPONENTS, AppRoutingModule]
+  exports: [...COMPONENTS]
 })
 export class CoreModule { }

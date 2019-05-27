@@ -2,9 +2,9 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
 // Containers
-import { AppShellComponent } from "./containers/app-shell/app-shell.component";
 import { LandingPageComponent } from "./containers/landing-page/landing-page.component";
-import { MainPageComponent } from "./containers/main-page/main-page.component";
+import { LoginComponent } from '../auth/containers/login/login.component';
+import { SignupComponent } from '../auth/containers/signup/signup.component';
 import { NotFoundPageComponent } from "./containers/not-found-page/not-found-page.component";
 
 /**
@@ -15,12 +15,14 @@ import { NotFoundPageComponent } from "./containers/not-found-page/not-found-pag
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "landing" },
   { path: "landing", component: LandingPageComponent },
+  { path: "login", component: LoginComponent },
+  { path: "signup", component: SignupComponent },
   { path: "main", loadChildren: "./core.module#CoreModule" },
   { path: "**", component: NotFoundPageComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class CoreRoutingModule {}

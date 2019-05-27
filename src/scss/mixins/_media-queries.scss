@@ -2,7 +2,7 @@
 $screen-sm-max: 576px;
 
 // Small tablets (portrait view)
-$screen-md-min: 768px;
+$screen-md-max: 768px;
 
 // Tablets and small desktops
 $screen-lg-min: 992px;
@@ -19,7 +19,7 @@ $screen-xl-min: 1200px;
  
  // Medium devices
  @mixin medium {
-    @media (min-width: #{$screen-md-min}) {
+    @media (max-width: #{$screen-md-max}) {
         @content;
     }
  }

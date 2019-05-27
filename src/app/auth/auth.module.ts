@@ -11,22 +11,25 @@ import { AuthRoutingModule } from './auth-routing.module';
 
 // Containers
 import { LoginComponent } from './containers/login/login.component'
+import { SignupComponent } from './containers/signup/signup.component';
+
 
 // NgRx
 import { reducer } from './reducers/auth.reducer';
+import { HttpClientModule } from '@angular/common/http';
 
-const COMPONENTS = [LoginComponent]
+const COMPONENTS = [LoginComponent, SignupComponent]
 
 @NgModule({
   declarations: COMPONENTS,
-  exports: COMPONENTS,
   imports: [
     CommonModule,
     AuthRoutingModule,
+    HttpClientModule,
     StoreModule.forFeature('auth', reducer),
     EffectsModule.forFeature([AuthEffects])    
   ],
-  providers: []
+  exports: [...COMPONENTS, AuthRoutingModule]
 })
 export class AuthModule {
   constructor(private store: Store<AppState>) {

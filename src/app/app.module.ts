@@ -16,12 +16,14 @@ import { CustomSerializer } from './ngrx-store/custom-route-serializer';
 // Containers
 import { AppComponent } from './core/app.component';
 import { AuthModule } from './auth/auth.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [],
   imports: [
     BrowserModule,
+    RouterModule.forRoot([]),
     // Core Module
     CoreModule,
     // Auth Module

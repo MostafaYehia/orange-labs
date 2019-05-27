@@ -27,7 +27,7 @@
       right: 40px;
       z-index: 3;
 
-      @include small {
+      @include medium {
         display: block;
       }
   }
@@ -41,7 +41,8 @@
     background: lightcoral;
     z-index: 3;
 
-    @include small {
+
+    @include medium {
       display: none;
     }
   }
