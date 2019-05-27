@@ -15,6 +15,7 @@ import { CustomSerializer } from './ngrx-store/custom-route-serializer';
 
 // Containers
 import { AppComponent } from './core/app.component';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -23,6 +24,8 @@ import { AppComponent } from './core/app.component';
     BrowserModule,
     // Core Module
     CoreModule,
+    // Auth Module
+    AuthModule,
     // NgRx Store for state management
     StoreModule.forRoot(reducers, { metaReducers }),
     // NgRx Effects for async state update
