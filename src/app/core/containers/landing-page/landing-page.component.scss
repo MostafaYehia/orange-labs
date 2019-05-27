@@ -1,7 +1,48 @@
+@import '../../../../scss/mixins/media-queries';
+
 :host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: orangered;
+
+  .site__logo {
     display: block;
-    width: 100%;
-    height: 100%;
-    color: white;
-    background: orangered;
+    position: absolute;
+    width: 4rem;
+    z-index: 2;
+
+    
+    @include iPadPro() {
+      width: 7rem;
+    }
+    
+  }
+
+  .site__auth__btns_wrapper {
+      display: none;
+      position: absolute;
+      top: 25px;
+      right: 40px;
+      z-index: 3;
+
+      @include small {
+        display: block;
+      }
+  }
+
+  .site__login__wrapper {
+    display: block;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    right: 20%;
+    background: lightcoral;
+    z-index: 3;
+
+    @include small {
+      display: none;
+    }
+  }
 }

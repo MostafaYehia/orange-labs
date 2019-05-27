@@ -13,17 +13,3 @@ export class SlideShowComponent implements OnInit {
   }
 
 }
-
-@Component({
-  selector: 'slider-item',
-  templateUrl: './slide-show-item.component.html',
-  styleUrls: ['./slide-show-item.component.scss']
-})
-export class SlideShowItemComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}

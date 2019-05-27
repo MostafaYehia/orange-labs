@@ -13,8 +13,9 @@ import { LandingPageComponent } from './containers/landing-page/landing-page.com
 
 // Components
 import { NavabarComponent } from './components/navabar/navabar.component';
-import { SlideShowComponent, SlideShowItemComponent } from './components/slide-show/slide-show.component';
-
+import { SlideShowComponent } from './components/slide-show/slide-show.component';
+import { SlideShowItemComponent } from './components/slide-show/slide-show-item.component';
+import { LoginSignupComponent } from './components/login-signup/login-signup.component';
 // Components
 
 const COMPONENTS = [
@@ -25,7 +26,8 @@ const COMPONENTS = [
     NotFoundPageComponent,
     SlideShowComponent,
     SlideShowItemComponent,
-    NavabarComponent
+    NavabarComponent,
+    LoginSignupComponent
 ];
 
 @NgModule({

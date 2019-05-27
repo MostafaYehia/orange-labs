@@ -1,6 +1,93 @@
+@import "../../../../scss/mixins/media-queries";
+
 :host {
-    position: absolute;
+  position: fixed;
+  width: 100%;
+  height: inherit;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: rgb(207, 0, 52);
+
+  .slider__overlay {
+    position: fixed;
     width: 100%;
     height: 100vh;
-    background: rgb(29, 29, 29);
+    z-index: 1;
+    background: rgba(76, 76, 76, 0);
+    background: -moz-linear-gradient(
+      left,
+      rgba(76, 76, 76, 0) 0%,
+      rgba(76, 76, 76, 0.53) 53%,
+      rgba(19, 19, 19, 1) 100%
+    );
+    background: -webkit-gradient(
+      left top,
+      right top,
+      color-stop(0%, rgba(76, 76, 76, 0)),
+      color-stop(53%, rgba(76, 76, 76, 0.53)),
+      color-stop(100%, rgba(19, 19, 19, 1))
+    );
+    background: -webkit-linear-gradient(
+      left,
+      rgba(76, 76, 76, 0) 0%,
+      rgba(76, 76, 76, 0.53) 53%,
+      rgba(19, 19, 19, 1) 100%
+    );
+    background: -o-linear-gradient(left, rgba(76, 76, 76, 0) 0%, rgba(76, 76, 76, 0.53) 53%, rgba(19, 19, 19, 1) 100%);
+    background: -ms-linear-gradient(left, rgba(76, 76, 76, 0) 0%, rgba(76, 76, 76, 0.53) 53%, rgba(19, 19, 19, 1) 100%);
+    background: linear-gradient(to right, rgba(76, 76, 76, 0) 0%, rgba(76, 76, 76, 0.53) 53%, rgba(19, 19, 19, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313', GradientType=1 );
+  }
+
+  .slide__bg {
+    height: 100%;
+    background: url("../../../../assets/imgs/welcome-1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.8;
+  }
+
+  .slide__details__wrapper {
+    position: absolute;
+    display: block;
+    min-width: 150px;
+    max-width: 40%;
+    min-height: 200px;
+    padding: 10px 0;
+    left: 4rem;
+    top: 40%;
+    transform: translateY(-50%);
+    //   background: rgba(255, 205, 240,0.2);
+    z-index: 2;
+
+    @include iPadPro {
+      top: 40%;
+      left: 7rem;
+    }
+
+    @include small {
+      top: 40%;
+      max-width: 60%;
+    }
+    
+    .slide__headline {
+      font-size: 2rem;
+      @include small {
+        font-size: 2rem;
+      }
+
+      @include iPadPro {
+        font-size: 2rem;
+      }
+    }
+
+    .slide__description {
+      @include iPadPro {
+        font-size: 1rem;
+        font-weight: 200;
+      }
+
+    }
+  }
 }

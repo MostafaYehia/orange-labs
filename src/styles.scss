@@ -2,11 +2,32 @@
 *,*::before, *::after {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    outline: none;
 }
 
 html, body {
+    font-family: sans-serif;
     height: 100%;
     width: 100%;
     margin: 0;
     background: lightblue;
+
+    .brand__color {
+        color: orangered;
+    }
+
+    .btn {
+        outline: none;
+        border: none;
+        background: white;
+        padding: 5px 10px;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    .brand__btn {
+        background: orangered;
+        color: white;
+        padding: 5px 10px;
+    }
 }

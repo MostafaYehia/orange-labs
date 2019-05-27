@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { SlideShowItem } from "../../components/slide-show/slide-show-item.component";
 
 @Component({
   selector: "app-landing-page",
@@ -6,7 +7,20 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./landing-page.component.scss"]
 })
 export class LandingPageComponent implements OnInit {
-  items = [1, 2, 3];
+  slides: SlideShowItem[] = [
+    {
+      bg: "../../../../assets/imgs/welcome-1.jpg",
+      headline: "The industry's standard dummy ever since the 1500s",
+      description: `
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+        It has survived not only five centuries
+    `,
+      actionBotton: {
+        label: "Apply",
+        action: () => console.log("Applying...")
+      }
+    }
+  ];
   constructor() {}
 
   ngOnInit() {}
