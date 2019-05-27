@@ -1,37 +1,98 @@
 /* You can add global styles to this file, and also import other style files */
-*,*::before, *::after {
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    outline: none;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  outline: none;
 }
 
-html, body {
-    font-family: sans-serif;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    background: lightblue;
+html,
+body {
+  font-family: sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background: lightblue;
 
-    .brand__color {
+  .brand__color {
+    color: #ff6600;
+  }
+
+  .btn {
+    outline: none;
+    border: none;
+    background: white;
+    padding: 5px 10px;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .brand__btn {
+    background: none;
+    color: white;
+    padding: 5px 10px;
+
+    &.outline {
+      background: none;
+      border-radius: 0.2rem;
+      border: 1px solid #ffffff;
+
+      &:hover {
+        background: none;
         color: #ff6600;
+        border: 1px solid #ff6600;
+      }
+
+      &:active {
+        background: none;
+        color: #c95000;
+        border: 1px solid #c95000;
+      }
     }
 
-    .btn {
-        outline: none;
+    &.large {
+      font-size: 1.2rem;
+    }
+
+    &:hover {
+      background: #ff6600;
+      border-radius: 0.2rem;
+    }
+
+    &:active {
+      background: #c95000;
+      border-radius: 0.2rem;
+    }
+  }
+
+  .form {
+    // background: green;
+    min-width: 300px;
+    .form__group {
+      display: flex;
+      flex-flow: column wrap;
+      margin-bottom: 0.5rem;
+
+      input {
+        padding: 7px;
         border: none;
-        background: white;
-        padding: 5px 10px;
-        user-select: none;
-        cursor: pointer;
+        border-radius: 0.2rem;
+        margin: 5px 0;
+      }
     }
+  }
 
-    .brand__btn {
-        background:none;
-        color: white;
-        padding: 5px 10px;
-        
-        &:hover {
-            background: #ff6600;
-        }
+  .brand__btn__active {
+    background: #ff6600;
+  }
+
+  .notice {
+    color: rgb(211, 211, 211);
+    font-size: 0.8rem;
+
+    &:hover {
+      color: rgb(255, 255, 255);
     }
+  }
 }

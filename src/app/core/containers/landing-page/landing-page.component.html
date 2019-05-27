@@ -1,17 +1,32 @@
 <!-- Logo -->
-<img class="site__logo" src="../../../../assets/imgs/logo.png" alt="orange-logo">
+<img
+  class="site__logo"
+  src="../../../../assets/imgs/logo.png"
+  alt="orange-logo"
+/>
 
 <!-- Auth buttons -->
 <div class="site__auth__btns_wrapper">
-  <button class="btn brand__btn">Login</button>
+  <button
+    class="btn brand__btn"
+    [routerLink]="['/login']"
+    routerLinkActive="brand__btn__active"
+  >
+    Login
+  </button>
   <span> | </span>
-  <button class="btn brand__btn">Signup</button>
+  <button
+    class="btn brand__btn"
+    [routerLink]="['/signup']"
+    routerLinkActive="brand__btn__active"
+  >
+    Signup
+  </button>
 </div>
 <!-- SlideShow -->
 <slide-show>
   <slider-item *ngFor="let slide of slides" [slide]="slide"></slider-item>
 </slide-show>
-<!-- Login -->
 <div class="site__login__wrapper">
-  <app-login-signup></app-login-signup>
+  <app-login-form title="welcome"></app-login-form>
 </div>

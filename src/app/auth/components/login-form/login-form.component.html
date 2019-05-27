@@ -1,0 +1,15 @@
+<h1 class="auth__title">Login</h1>
+<form class="form login__form" [formGroup]="loginForm" (ngSubmit)="login($event)">
+    <div class="form__group">
+        <label for="email">Email</label>
+        <input type="text" placeholder="Enter your email address" formControlName="email">
+    </div>
+    <div class="form__group">
+        <label for="password">Password</label>
+        <input type="password" placeholder="Enter your password" formControlName="password">
+    </div>
+    <!-- Create new account -->
+    <a class="notice form__create_acount"  [routerLink]="['/signup']"><small>Create new account?</small></a>
+
+    <button class="btn brand__btn outline large login__btn">Go</button>
+</form>

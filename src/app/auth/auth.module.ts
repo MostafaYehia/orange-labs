@@ -1,35 +1,36 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { StoreModule, Store } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './effects/auth.effects';
-import { AppState } from './../ngrx-store/reducers/index';
-import * as fromAuth from '../auth/actions/auth.actions';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { StoreModule, Store } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { AuthEffects } from "./effects/auth.effects";
+import { AppState } from "./../ngrx-store/reducers/index";
+import * as fromAuth from "../auth/actions/auth.actions";
 
 // Modules
-import { AuthRoutingModule } from './auth-routing.module';
+import { AuthRoutingModule } from "./auth-routing.module";
 
 // Containers
-import { LoginComponent } from './containers/login/login.component'
-import { SignupComponent } from './containers/signup/signup.component';
-
+import { LoginComponent } from "./containers/login/login.component";
+import { SignupComponent } from "./containers/signup/signup.component";
 
 // NgRx
-import { reducer } from './reducers/auth.reducer';
-import { HttpClientModule } from '@angular/common/http';
+import { reducer } from "./reducers/auth.reducer";
+import { HttpClientModule } from "@angular/common/http";
+import { ReactiveFormsModule } from "@angular/forms";
 
-const COMPONENTS = [LoginComponent, SignupComponent]
+const COMPONENTS = [LoginComponent, SignupComponent];
 
 @NgModule({
   declarations: COMPONENTS,
   imports: [
     CommonModule,
     AuthRoutingModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forFeature('auth', reducer),
-    EffectsModule.forFeature([AuthEffects])    
+    StoreModule.forFeature("auth", reducer),
+    EffectsModule.forFeature([AuthEffects])
   ],
-  exports: [...COMPONENTS, AuthRoutingModule]
+  exports: [...COMPONENTS, AuthRoutingModule, ReactiveFormsModule]
 })
 export class AuthModule {
   constructor(private store: Store<AppState>) {

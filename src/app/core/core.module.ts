@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 // Modules
@@ -15,7 +16,8 @@ import { LandingPageComponent } from './containers/landing-page/landing-page.com
 import { NavabarComponent } from './components/navabar/navabar.component';
 import { SlideShowComponent } from './components/slide-show/slide-show.component';
 import { SlideShowItemComponent } from './components/slide-show/slide-show-item.component';
-import { LoginSignupComponent } from '../auth/components/login-signup/login-signup.component';
+import { LoginFormComponent } from '../auth/components/login-form/login-form.component';
+import { SignupFormComponent } from '../auth/components/signup-form/signup-form.component';
 
 // Components
 
@@ -28,13 +30,15 @@ const COMPONENTS = [
     SlideShowComponent,
     SlideShowItemComponent,
     NavabarComponent,
-    LoginSignupComponent
+    LoginFormComponent,
+    SignupFormComponent
 ];
 
 @NgModule({
   declarations: [COMPONENTS],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     CoreRoutingModule
   ],
   exports: [...COMPONENTS]
