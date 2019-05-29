@@ -19,6 +19,10 @@ import { SlideShowItemComponent } from './components/slide-show/slide-show-item.
 import { LoginFormComponent } from '../auth/components/login-form/login-form.component';
 import { SignupFormComponent } from '../auth/components/signup-form/signup-form.component';
 
+// Directives
+import { SlideBlueprintDirective } from './components/slide-show/slide-blueprint.directive';
+
+
 // Components
 
 const COMPONENTS = [
@@ -29,6 +33,7 @@ const COMPONENTS = [
     NotFoundPageComponent,
     SlideShowComponent,
     SlideShowItemComponent,
+    SlideBlueprintDirective,
     NavabarComponent,
     LoginFormComponent,
     SignupFormComponent

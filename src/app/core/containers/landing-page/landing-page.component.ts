@@ -12,7 +12,31 @@ export class LandingPageComponent implements OnInit {
       bg: "../../../../assets/imgs/welcome-1.jpg",
       headline: "The industry's standard dummy ever since the 1500s",
       description: `
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+        Printer took a galley of type and scrambled it to make a type specimen book. 
+        It has survived not only five centuries
+    `,
+      actionBotton: {
+        label: "Apply",
+        action: () => console.log("Applying...")
+      }
+    },
+    {
+      bg: "../../../../assets/imgs/welcome-2.jpg",
+      headline: "Dummy standard ever since the 1500s",
+      description: `
+        Scrambled it to make a type specimen book. 
+        It has survived not only five centuries
+    `,
+      actionBotton: {
+        label: "Apply",
+        action: () => console.log("Applying...")
+      }
+    },
+    {
+      bg: "../../../../assets/imgs/welcome-3.jpg",
+      headline: "Standard dummy ever since the 1500s",
+      description: `
+        When an unknown printer took a galley of type and scrambled it to make a type specimen book. 
         It has survived not only five centuries
     `,
       actionBotton: {

@@ -12,7 +12,7 @@
     [routerLink]="['/login']"
     routerLinkActive="brand__btn__active"
   >
-    Login
+    Login 
   </button>
   <span> | </span>
   <button
@@ -25,7 +25,9 @@
 </div>
 <!-- SlideShow -->
 <slide-show>
-  <slider-item *ngFor="let slide of slides" [slide]="slide"></slider-item>
+  <ng-container *ngFor="let slide of slides">
+    <slider-item *slideBlueprint [slide]="slide"></slider-item>
+  </ng-container>
 </slide-show>
 <div class="site__login__wrapper">
   <app-login-form title="welcome"></app-login-form>

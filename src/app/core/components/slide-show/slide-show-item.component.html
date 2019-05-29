@@ -1,9 +1,15 @@
-<!-- Overlay -->
-<span class="slider__overlay"></span>
-<!-- Slide Image -->
-<div class="slide__bg" [ngStyle]="{'backgroundImage': 'url('+ slide.bg +')'}"></div>
-<!-- Details -->
-<div class="slide__details__wrapper">
-    <h1 class="slide__headline" >{{slide.headline}}</h1>
-    <p class="slide__description" >{{slide.description}}</p>
-</div>
+<ng-container [@fadeInSlide]="slideState">
+  <!-- Overlay -->
+  <span class="slider__overlay"></span>
+  <!-- Slide Image -->
+  <div
+    class="slide__bg"
+    [ngStyle]="{ backgroundImage: 'url(' + slide.bg + ')' }"
+  ></div>
+  <!-- Details -->
+  <div class="slide__details__wrapper">
+    <h1 class="slide__headline">{{ slide.headline }}</h1>
+    <p class="slide__description">{{ slide.description }}</p>
+  </div>
+  []
+</ng-container>

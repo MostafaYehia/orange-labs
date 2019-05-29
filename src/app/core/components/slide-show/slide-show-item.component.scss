@@ -62,12 +62,12 @@
     z-index: 2;
 
     @include iPadPro {
-      top: 40%;
+      top: 50%;
       left: 7rem;
     }
 
     @include medium {
-      top: 40%;
+      top: 50%;
       left: 4rem;
       max-width: 60%;
     }

@@ -1,0 +1,4 @@
+<ng-container [ngTemplateOutlet]="slides[currentSlide]"></ng-container>
+<div class="slideshow__paginator">
+    <span *ngFor="let dot of slides; let i = index" [ngClass]="{'active': i === currentSlide}" (click)="setSlide(i)"></span>
+</div>
