@@ -17,13 +17,13 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.subs
-    // this.subs.push(
-    //   this.store.select(isLoggedState).subscribe(loggedIn => {
-    //     if (loggedIn) {
-    //       this.router.navigate(["/main"]);
-    //     }
-    //   })
-    // );
+    this.subs.push(
+      this.store.select(isLoggedState).subscribe(loggedIn => {
+        if (loggedIn) {
+          this.router.navigate(["/main"]);
+        }
+      })
+    );
   }
 
   ngOnDestroy() {

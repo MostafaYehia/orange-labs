@@ -15,6 +15,14 @@ body {
   margin: 0;
   background: lightblue;
 
+  .container {
+    padding: 0 20px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
   .brand__color {
     color: #ff6600;
   }
@@ -32,6 +40,7 @@ body {
     background: none;
     color: white;
     padding: 5px 10px;
+    transition: all 0.3s ease-in-out;
 
     &.outline {
       background: none;
@@ -96,4 +105,6 @@ body {
       color: rgb(255, 255, 255);
     }
   }
+
+
 }

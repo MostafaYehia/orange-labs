@@ -48,8 +48,6 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
     }
 
     case AuthActionTypes.SIGNUP_SUCCESS: {
-      console.log("@Reducer: Signup user", action.payload);
-
       return {
         ...state,
         loading: false,
@@ -70,11 +68,12 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
       return { ...state, loading: false, error };
     }
 
-    case AuthActionTypes.LOGOUT:
+    case AuthActionTypes.LOGGEDOUT:
       return {
         ...state,
         user: null,
-        loading: false
+        loading: false,
+        error: null
       };
 
     default:

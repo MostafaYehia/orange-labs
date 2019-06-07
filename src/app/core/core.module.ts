@@ -12,9 +12,6 @@ import { MainPageComponent } from "./containers/main-page/main-page.component";
 // Components
 import { NavabarComponent } from "./components/navabar/navabar.component";
 
-// Directives
-import { SlideBlueprintDirective } from "./components/slide-show/slide-blueprint.directive";
-
 // Components
 
 const COMPONENTS = [

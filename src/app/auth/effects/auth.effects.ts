@@ -8,12 +8,13 @@ import {
   AuthActions,
   AuthError,
   LoginSuccess,
-  SignupSuccess
+  SignupSuccess,
+  Loggedout
 } from "../actions/auth.actions";
 import { AuthApiService } from "../services/auth-api.service";
 import { LocalStorageService } from "../services/localStorage.service";
 import { Action } from "@ngrx/store";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
 @Injectable({ providedIn: "root" })
 export class AuthEffects {
@@ -95,9 +96,14 @@ export class AuthEffects {
   );
 
   // Logout
-  // @Effect()
-  // Logout$ = this.actions$.pipe(
-  //   ofType(AuthActionTypes.LOGOUT),
-  //   concatMap(() => EMPTY)
-  // );
+  @Effect()
+  Logout$ = this.actions$.pipe(
+    ofType(AuthActionTypes.LOGOUT),
+    map(res => {
+      // Show that you need to verify your account
+      this.secureStorage.removeItem(this.userDataKey);
+      this.router.navigate(["/landing"]);
+      return new Loggedout();
+    })
+  );
 }
