@@ -1,15 +1,19 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SlideShowItem } from "../../components/slide-show/slide-show-item.component";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/ngrx-store/reducers";
 import { LoadUser } from "src/app/auth/actions/auth.actions";
+import { Subscription } from "rxjs";
+import { isLoggedState } from "./../../../auth/selectors";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-landing-page",
   templateUrl: "./landing-page.component.html",
   styleUrls: ["./landing-page.component.scss"]
 })
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent implements OnInit, OnDestroy {
+  subs: Subscription[] = [];
   slides: SlideShowItem[] = [
     {
       bg: "../../../../assets/imgs/welcome-1.jpg",
@@ -48,9 +52,21 @@ export class LandingPageComponent implements OnInit {
       }
     }
   ];
-  constructor(private store: Store<AppState>) {}
+
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnInit() {
+    // this.subs
+    // this.subs.push(
+    //   this.store.select(isLoggedState).subscribe(loggedIn => {
+    //     if (loggedIn) {
+    //       this.router.navigate(["/main"]);
+    //     }
+    //   })
+    // );
+  }
 
+  ngOnDestroy() {
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 }

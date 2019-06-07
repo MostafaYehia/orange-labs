@@ -63,7 +63,7 @@ export class AuthEffects {
       return this.authApi.login(action.payload).pipe(
         map(res => {
           this.secureStorage.storeItem(this.userDataKey, res);
-          this.router.navigate(["/"]);
+          this.router.navigate(["/main"]);
           return new LoginSuccess(res);
         }),
         catchError(err => {

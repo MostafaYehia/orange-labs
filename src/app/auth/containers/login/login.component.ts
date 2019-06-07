@@ -1,15 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { isLoggedState } from '../../selectors';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../ngrx-store/reducers';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  subs: Subscription[] = [];
 
-  constructor() { }
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnInit() {
+    // this.subs
+    this.subs.push(
+      this.store.select(isLoggedState).subscribe(loggedIn => {
+        console.log("Is logged in", loggedIn)
+        if (loggedIn) {
+          this.router.navigate(["/main"]);
+        }
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 
 }

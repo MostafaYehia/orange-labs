@@ -1,21 +1,23 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { Routes, RouterModule, Route } from "@angular/router";
 
 // Containers
-import { LandingPageComponent } from "./containers/landing-page/landing-page.component";
-import { LoginComponent } from "../auth/containers/login/login.component";
-import { SignupComponent } from "../auth/containers/signup/signup.component";
-import { NotFoundPageComponent } from "./containers/not-found-page/not-found-page.component";
-import { ChechAuthService } from "../auth/guards/chech-auth.service";
-import { LoginFormComponent } from "../auth/components/login-form/login-form.component";
-import { SignupFormComponent } from "../auth/components/signup-form/signup-form.component";
+import { MainPageComponent } from "./containers/main-page/main-page.component";
 
-const COMPONENTS = [];
-
+const routes: Route[] = [
+  {
+    path: "",
+    children: [
+      {
+        path: "",
+        component: MainPageComponent
+      }
+    ]
+  }
+];
 
 @NgModule({
-  declarations: [...COMPONENTS],
-  imports: [RouterModule.forChild([])],
-  exports: [...COMPONENTS, RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class CoreRoutingModule {}
