@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 // Modules
 import { CoreRoutingModule } from './core-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 // Containers
 import { AppComponent } from './app.component';
@@ -34,9 +35,7 @@ const COMPONENTS = [
     SlideShowComponent,
     SlideShowItemComponent,
     SlideBlueprintDirective,
-    NavabarComponent,
-    LoginFormComponent,
-    SignupFormComponent
+    NavabarComponent
 ];
 
 @NgModule({
@@ -44,7 +43,8 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    SharedModule
   ],
   exports: [...COMPONENTS]
 })

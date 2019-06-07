@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { SlideShowItem } from "../../components/slide-show/slide-show-item.component";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/ngrx-store/reducers";
+import { LoadUser } from "src/app/auth/actions/auth.actions";
 
 @Component({
   selector: "app-landing-page",
@@ -45,7 +48,9 @@ export class LandingPageComponent implements OnInit {
       }
     }
   ];
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 }

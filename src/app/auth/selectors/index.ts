@@ -1,13 +1,38 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { AuthState } from '../reducers/auth.reducer';
+import { AuthState } from "../reducers/auth.reducer";
 
-
-const authState = createFeatureSelector<AuthState>('auth');
-
+const authState = createFeatureSelector<AuthState>("auth");
 
 // Get User Token
-export const token = createSelector(authState, (state: AuthState) => state.user.token)
+export const tokenState = createSelector(
+  authState,
+  (state: AuthState) => state.user.token
+);
+
+// Logged in state
+export const isLoggedState = createSelector(
+  authState,
+  (state: AuthState) => !!state.user
+);
+
+// Get User Account verification state
+export const isVerifiedState = createSelector(
+  authState,
+  (state: AuthState) => state.user.data["isVerified"]
+);
+
+// Get Loading State
+export const authLoading = createSelector(
+  authState,
+  (state: AuthState) => state.loading
+);
 
 // Authentication loading state
-export const loading = createSelector(authState, (state: AuthState, props)=> state.loading);
-
+export const loginErrorState = createSelector(
+  authState,
+  (state: AuthState) => state.error.login
+);
+export const signupErrorState = createSelector(
+  authState,
+  (state: AuthState) => state.error.signup
+);

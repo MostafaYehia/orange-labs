@@ -8,17 +8,20 @@ import * as fromAuth from "../auth/actions/auth.actions";
 
 // Modules
 import { AuthRoutingModule } from "./auth-routing.module";
+import { SharedModule } from '../shared/shared.module';
 
 // Containers
 import { LoginComponent } from "./containers/login/login.component";
 import { SignupComponent } from "./containers/signup/signup.component";
+
+import { SignupFormComponent } from './components/signup-form/signup-form.component';
 
 // NgRx
 import { reducer } from "./reducers/auth.reducer";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 
-const COMPONENTS = [LoginComponent, SignupComponent];
+const COMPONENTS = [LoginComponent, SignupComponent, SignupFormComponent];
 
 @NgModule({
   declarations: COMPONENTS,
@@ -26,6 +29,7 @@ const COMPONENTS = [LoginComponent, SignupComponent];
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
+    SharedModule,
     HttpClientModule,
     StoreModule.forFeature("auth", reducer),
     EffectsModule.forFeature([AuthEffects])

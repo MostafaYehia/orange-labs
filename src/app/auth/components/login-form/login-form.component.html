@@ -1,12 +1,14 @@
 <h1 class="auth__title">Login</h1>
-<form class="form login__form" [formGroup]="loginForm" (ngSubmit)="login($event)">
+<span class="auth__message" *ngIf="authLoading$ | async">Loading...</span>
+<small class="auth__message error" *ngIf="loginError$ | async as errorMessage">{{errorMessage}}</small>
+<form class="form login__form" [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="form__group">
         <label for="email">Email</label>
-        <input type="text" placeholder="Enter your email address" formControlName="email">
+        <input type="text" name="login_email" placeholder="Enter your email address" formControlName="email">
     </div>
     <div class="form__group">
         <label for="password">Password</label>
-        <input type="password" placeholder="Enter your password" formControlName="password">
+        <input type="password" name="login_password" placeholder="Enter your password" formControlName="password">
     </div>
     <!-- Create new account -->
     <a class="notice form__create_acount"  [routerLink]="['/signup']"><small>Create new account?</small></a>

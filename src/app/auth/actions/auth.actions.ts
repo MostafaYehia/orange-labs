@@ -1,19 +1,23 @@
-import { Action } from '@ngrx/store';
+import { Action } from "@ngrx/store";
 
 export enum AuthActionTypes {
-  CHECK_AUTH = '[Auth] Check Auth',
+  CHECK_AUTH = "[Auth] Check Auth",
 
-  LOAD_USER = '[Auth] Load User',
-  LOAD_USER_SUCCESS = '[Auth] Load User Success',
-  LOAD_USER_FAILD = '[Auth] Load User Faild',
+  LOAD_USER = "[Auth] Load User",
+  LOAD_USER_SUCCESS = "[Auth] Load User Success",
+  LOAD_USER_FAILD = "[Auth] Load User Faild",
 
-  LOGIN = '[Auth] Login',
-  LOGIN_SUCCESS = '[Auth] Login Success',
-  LOGIN_FAILD = '[Auth] Login Faild',
+  LOGIN = "[Auth] Login",
+  LOGIN_SUCCESS = "[Auth] Login Success",
 
-  LOGOUT = '[Auth] Logout',
-  LOGGEDOUT = '[Auth] Loggedout'
+  SIGNUP = "[Auth] Signup",
+  SIGNUP_SUCCESS = "[Auth] Signup Success",
 
+  LOGOUT = "[Auth] Logout",
+  LOGGEDOUT = "[Auth] Loggedout",
+
+  AUTH_LOADING = "[Auth] Loading",
+  AUTH_ERROR = "[Auth] Error"
 }
 
 /**
@@ -21,7 +25,7 @@ export enum AuthActionTypes {
  */
 export class CheckAuth implements Action {
   readonly type = AuthActionTypes.CHECK_AUTH;
-  constructor() { }
+  constructor() {}
 }
 
 /**
@@ -29,7 +33,7 @@ export class CheckAuth implements Action {
  */
 export class LoadUser implements Action {
   readonly type = AuthActionTypes.LOAD_USER;
-  constructor() { }
+  constructor() {}
 }
 
 /**
@@ -37,7 +41,7 @@ export class LoadUser implements Action {
  */
 export class LoadUserSuccess implements Action {
   readonly type = AuthActionTypes.LOAD_USER_SUCCESS;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 /**
@@ -45,41 +49,49 @@ export class LoadUserSuccess implements Action {
  */
 export class LoadUserFaild implements Action {
   readonly type = AuthActionTypes.LOAD_USER_FAILD;
-  constructor(public error: any) { }
+  constructor(public error: any) {}
 }
-
 
 /**
  * Login Action
  */
 export class Login implements Action {
   readonly type = AuthActionTypes.LOGIN;
-  constructor() { }
+  constructor(public payload: { email: string; password: string }) {}
 }
 
 /**
- * Login Faild Action
+ * Login Success Action
  */
 export class LoginSuccess implements Action {
   readonly type = AuthActionTypes.LOGIN_SUCCESS;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 /**
- * Login Faild Action
+ * Signup Action
  */
-export class LoginFaild implements Action {
-  readonly type = AuthActionTypes.LOGIN_FAILD;
-  constructor(public error: any) { }
+export class Signup implements Action {
+  readonly type = AuthActionTypes.SIGNUP;
+  constructor(
+    public payload: { username: string; email: string; password: string }
+  ) {}
 }
 
+/**
+ * Signup Success Action
+ */
+export class SignupSuccess implements Action {
+  readonly type = AuthActionTypes.SIGNUP_SUCCESS;
+  constructor(public payload: any) {}
+}
 
 /**
  * Logout Action
  */
 export class Logout implements Action {
   readonly type = AuthActionTypes.LOGOUT;
-  constructor() { }
+  constructor() {}
 }
 
 /**
@@ -87,20 +99,34 @@ export class Logout implements Action {
  */
 export class Loggedout implements Action {
   readonly type = AuthActionTypes.LOGGEDOUT;
-  constructor() { }
+  constructor() {}
 }
 
+/**
+ * Authentication Error Action
+ */
+export class AuthLoading implements Action {
+  readonly type = AuthActionTypes.AUTH_LOADING;
+  constructor() {}
+}
+
+/**
+ * Authentication Error Action
+ */
+export class AuthError implements Action {
+  readonly type = AuthActionTypes.AUTH_ERROR;
+  constructor(public payload: { type: string; message: string }) {}
+}
 
 export type AuthActions =
   | CheckAuth
-
   | LoadUser
   | LoadUserSuccess
-  | LoadUserFaild
-
   | Login
   | LoginSuccess
-  | LoginFaild
-
+  | Signup
+  | SignupSuccess
   | Logout
   | Loggedout
+  | AuthLoading
+  | AuthError;

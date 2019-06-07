@@ -1,12 +1,40 @@
 <h1 class="auth__title">Signup</h1>
-<form class="form login__form" [formGroup]="signupForm" (ngSubmit)="signup($event)">
-    <div class="form__group">
-        <label for="email">Email</label>
-        <input type="text" placeholder="Enter your email address" formControlName="email">
-    </div>
-    <div class="form__group">
-        <label for="password">Password</label>
-        <input type="password" placeholder="Enter your password" formControlName="password">
-    </div>
-    <button class="btn brand__btn outline large login__btn">Login</button>
+<span class="auth__message" *ngIf="authLoading$ | async">Loading...</span>
+<small
+  class="auth__message error"
+  *ngIf="signupError$ | async as errorMessage"
+  >{{ errorMessage }}</small
+>
+<form class="form signup__form" [formGroup]="signupForm" (ngSubmit)="signup()">
+  <div class="form__group">
+    <label for="username">Username</label>
+    <input
+      type="text"
+      placeholder="Enter a username"
+      formControlName="username"
+    />
+  </div>
+  <div class="form__group">
+    <label for="email">Email</label>
+    <input
+      type="text"
+      placeholder="Enter your email address"
+      formControlName="email"
+    />
+  </div>
+  <div class="form__group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      placeholder="Enter your password"
+      formControlName="password"
+    />
+  </div>
+
+  <!-- Login -->
+  <a class="notice form__try__login" [routerLink]="['/login']"
+    ><small>Login to an existing one?</small></a
+  >
+
+  <button class="btn brand__btn outline large signup__btn">Create</button>
 </form>
