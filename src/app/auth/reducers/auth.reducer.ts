@@ -73,7 +73,7 @@ export function reducer(state = initialState, action: AuthActions): AuthState {
         ...state,
         user: null,
         loading: false,
-        error: null
+        error: { login: null, signup: null }
       };
 
     default:

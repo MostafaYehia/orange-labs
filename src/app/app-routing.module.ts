@@ -6,7 +6,7 @@ import { LandingPageComponent } from "./core/containers/landing-page/landing-pag
 import { NotFoundPageComponent } from "./core/containers/not-found-page/not-found-page.component";
 
 // Guards
-import { ChechAuthService } from "./auth/guards/chech-auth.service";
+import { VerifyAccountPageComponent } from "./core/containers/verify-account-page/verify-account-page.component";
 
 /**
  * Add all routes to app-shell component to provide flexibilty for routes
@@ -14,15 +14,17 @@ import { ChechAuthService } from "./auth/guards/chech-auth.service";
  * navbar like 'login,signup, landing')
  */
 const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "landing" },
+  {
+    path: "",
+    loadChildren: "./core/core.module#CoreModule"
+  },
   {
     path: "landing",
     component: LandingPageComponent
   },
   {
-    path: "main",
-    loadChildren: "./core/core.module#CoreModule",
-    canActivate: [ChechAuthService]
+    path: "account/verify",
+    component: VerifyAccountPageComponent
   },
   { path: "**", component: NotFoundPageComponent }
 ];

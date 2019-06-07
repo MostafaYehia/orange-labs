@@ -5,6 +5,7 @@ import { environment } from "../environments/environment";
 // Modules
 import { AppRoutingModule } from "./app-routing.module";
 import { AuthModule } from "./auth/auth.module";
+import { SharedModule } from './shared/shared.module';
 
 // NgRx Modules ( State management )
 import { StoreModule } from "@ngrx/store";
@@ -17,17 +18,19 @@ import { CustomSerializer } from "./ngrx-store/custom-route-serializer";
 // Containers
 import { AppComponent } from "./core/app.component";
 import { LandingPageComponent } from "./core/containers/landing-page/landing-page.component";
+import { VerifyAccountPageComponent } from './core/containers/verify-account-page/verify-account-page.component';
 
 // Components
 import { SlideShowComponent } from "./core/components/slide-show/slide-show.component";
 import { SlideShowItemComponent } from "./core/components/slide-show/slide-show-item.component";
 
 // Directives
-import { SlideBlueprintDirective } from './core/components/slide-show/slide-blueprint.directive';
+import { SlideBlueprintDirective } from "./core/components/slide-show/slide-blueprint.directive";
 
 const COMPONENTS = [
   AppComponent,
   LandingPageComponent,
+  VerifyAccountPageComponent,
   SlideShowComponent,
   SlideShowItemComponent,
   SlideBlueprintDirective
@@ -41,6 +44,7 @@ const COMPONENTS = [
     AuthModule,
     // App Routing Module
     AppRoutingModule,
+    SharedModule,
     // NgRx Store for state management
     StoreModule.forRoot(reducers, { metaReducers }),
     // NgRx Effects for async state update

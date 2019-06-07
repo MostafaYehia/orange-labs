@@ -1,26 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 
 // Modules
-import { SharedModule } from '../shared/shared.module';
 
 // Containers
 import { ContactsPageComponent } from './containers/contacts-page/contacts-page.component';
 
 const COMPONENTS = [ContactsPageComponent];
 
+const routes: Route[] = [{
+    path: '',
+    component: ContactsPageComponent
+}]
+
 @NgModule({
   declarations: [COMPONENTS],
   imports: [
     CommonModule,
-    RouterModule.forChild([{
-      path: '',
-      component: ContactsPageComponent
-    }]),
-    // Shared Module
-    SharedModule
+    RouterModule.forChild(routes)
   ],
   exports: [...COMPONENTS, RouterModule]
 })
-export class SearchModule { }
+export class ContactsModule { }

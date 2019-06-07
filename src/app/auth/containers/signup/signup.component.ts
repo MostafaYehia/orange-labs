@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../ngrx-store/reducers";
 import { Router } from "@angular/router";
-import { isLoggedState } from "../../selectors";
+import { isLoggedInState } from "../../selectors";
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // this.subs
     this.subs.push(
-      this.store.select(isLoggedState).subscribe(loggedIn => {
+      this.store.select(isLoggedInState).subscribe(loggedIn => {
         if (loggedIn) {
           this.router.navigate(["/main"]);
         }

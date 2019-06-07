@@ -27,19 +27,6 @@ export class AuthEffects {
     private actions$: Actions<AuthActions>
   ) {}
 
-  // Check Auth
-  // @Effect()
-  // checkAuth$ = this.actions$.pipe(
-  //   ofType(AuthActionTypes.CHECK_AUTH),
-  //   switchMap((action: any) => {
-  //     return this.authApi.login(action.payload).pipe(
-  //       map(res => {
-  //         return new LoggedIn({ userData: res });
-  //       })
-  //     );
-  //   })
-  // );
-
   // Load user
   @Effect()
   loadUser$: Observable<Action> = this.actions$.pipe(
@@ -47,12 +34,22 @@ export class AuthEffects {
     switchMap(() => {
       // Load user
       const user = this.secureStorage.getItem(this.userDataKey);
-      if (user) {
-        this.router.navigate(["/"]);
-        return of(new LoginSuccess(user));
-      } else {
-        return of({ type: "error" });
-      }
+      const token = user ? user.token : null;
+
+      return this.authApi.checkAuth(token).pipe(
+        map(res => {
+          // Store new backend user state
+          const newData = {
+            token,
+            user: { ...user, isVerified: res.isVerified }
+          };
+          this.secureStorage.storeItem(this.userDataKey, newData);
+          return new LoginSuccess(newData);
+        }),
+        catchError(err => {
+          return of(new Loggedout());
+        })
+      );
     })
   );
 

@@ -1,5 +1,6 @@
 <header class="container">
   <img
+    [routerLink]="['/main']"
     class="site__logo"
     src="../../../../assets/imgs/logo.png"
     width="50px"
@@ -7,8 +8,14 @@
   />
   <nav>
     <ul class="nav__links">
-      <li><a href="#">Contacts</a></li>
+      <li *ngIf="loggedState$ | async"><a [routerLink]="['/contacts']">Contacts</a></li>
     </ul>
   </nav>
-  <button class="btn brand__btn outline navbar__right" (click)="logout()">Logout</button>
+  <button *ngIf="loggedState$ | async" class="btn brand__btn outline navbar__right" (click)="logout()">
+    Logout
+  </button>
+
+  <button *ngIf="!(loggedState$ | async)" [routerLink]="['/login']" class="btn brand__btn outline navbar__right">
+    Login
+  </button>
 </header>

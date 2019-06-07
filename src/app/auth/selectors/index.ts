@@ -10,7 +10,7 @@ export const tokenState = createSelector(
 );
 
 // Logged in state
-export const isLoggedState = createSelector(
+export const isLoggedInState = createSelector(
   authState,
   (state: AuthState) => !!state.user
 );

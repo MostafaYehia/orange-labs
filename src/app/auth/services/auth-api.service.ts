@@ -19,4 +19,8 @@ export class AuthApiService {
   signup(data: { email: string; password: string }): Observable<any> {
     return this.http.post(this.api.urls.signup, data);
   }
+
+  checkAuth(token: string): Observable<any> {
+    return this.http.get(`${this.api.urls.checkAuth}?token=${token}`);
+  }
 }

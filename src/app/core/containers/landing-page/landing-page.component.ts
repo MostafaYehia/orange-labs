@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { AppState } from "src/app/ngrx-store/reducers";
 import { LoadUser } from "src/app/auth/actions/auth.actions";
 import { Subscription } from "rxjs";
-import { isLoggedState } from "./../../../auth/selectors";
+import { isLoggedInState } from "./../../../auth/selectors";
 import { Router } from "@angular/router";
 
 @Component({
@@ -58,7 +58,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // this.subs
     this.subs.push(
-      this.store.select(isLoggedState).subscribe(loggedIn => {
+      this.store.select(isLoggedInState).subscribe(loggedIn => {
         if (loggedIn) {
           this.router.navigate(["/main"]);
         }

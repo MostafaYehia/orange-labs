@@ -8,7 +8,8 @@ export class ApiService {
 
   urls = {
     login: `${this.baseUrl}/auth/login`,
-    signup: `${this.baseUrl}/auth/signup`
+    signup: `${this.baseUrl}/auth/signup`,
+    checkAuth: `${this.baseUrl}/auth/check`
   };
 
   constructor() {}
