@@ -7,27 +7,15 @@ import { LoginComponent } from "../auth/containers/login/login.component";
 import { SignupComponent } from "../auth/containers/signup/signup.component";
 import { NotFoundPageComponent } from "./containers/not-found-page/not-found-page.component";
 import { ChechAuthService } from "../auth/guards/chech-auth.service";
+import { LoginFormComponent } from "../auth/components/login-form/login-form.component";
+import { SignupFormComponent } from "../auth/components/signup-form/signup-form.component";
 
-/**
- * Add all routes to app-shell component to provide flexibilty for routes
- * with full screen design ( Which doesn't implement reusable
- * navbar like 'login,signup, landing')
- */
-const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "landing" },
-  { path: "landing", component: LandingPageComponent },
-  { path: "login", component: LoginComponent, canActivate: [ChechAuthService] },
-  {
-    path: "signup",
-    component: SignupComponent,
-    canActivate: [ChechAuthService]
-  },
-  { path: "main", loadChildren: "./core.module#CoreModule" },
-  { path: "**", component: NotFoundPageComponent }
-];
+const COMPONENTS = [];
+
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  declarations: [...COMPONENTS],
+  imports: [RouterModule.forChild([])],
+  exports: [...COMPONENTS, RouterModule]
 })
 export class CoreRoutingModule {}

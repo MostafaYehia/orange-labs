@@ -12,20 +12,15 @@ import { tap, map, catchError } from "rxjs/operators";
 })
 @Injectable()
 export class ChechAuthService implements CanActivate {
-  constructor(private router: Router, private store: Store<AppState>) {
-    console.log("Can activated: ");
-  }
-  
+  constructor(private router: Router, private store: Store<AppState>) {}
 
   canActivate(): Observable<boolean> {
     return this.store.select(isLoggedState).pipe(
       map(loggedIn => {
         if (loggedIn) {
-          console.log("Navigate to home");
-          this.router.navigate(["/"]);
+          this.router.navigate(["/main"]);
           return false;
         } else {
-          console.log("Continue");
           return true;
         }
       })

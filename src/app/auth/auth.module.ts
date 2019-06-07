@@ -8,20 +8,24 @@ import * as fromAuth from "../auth/actions/auth.actions";
 
 // Modules
 import { AuthRoutingModule } from "./auth-routing.module";
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from "../shared/shared.module";
 
-// Containers
-import { LoginComponent } from "./containers/login/login.component";
-import { SignupComponent } from "./containers/signup/signup.component";
-
-import { SignupFormComponent } from './components/signup-form/signup-form.component';
+import { SignupFormComponent } from "./components/signup-form/signup-form.component";
 
 // NgRx
 import { reducer } from "./reducers/auth.reducer";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
+import { LoginComponent } from "./containers/login/login.component";
+import { SignupComponent } from "./containers/signup/signup.component";
+import { LoginFormComponent } from "./components/login-form/login-form.component";
 
-const COMPONENTS = [LoginComponent, SignupComponent, SignupFormComponent];
+const COMPONENTS = [
+  LoginComponent,
+  SignupComponent,
+  LoginFormComponent,
+  SignupFormComponent
+];
 
 @NgModule({
   declarations: COMPONENTS,
@@ -34,10 +38,10 @@ const COMPONENTS = [LoginComponent, SignupComponent, SignupFormComponent];
     StoreModule.forFeature("auth", reducer),
     EffectsModule.forFeature([AuthEffects])
   ],
-  exports: [...COMPONENTS, AuthRoutingModule, ReactiveFormsModule]
+  exports: [...COMPONENTS, AuthRoutingModule]
 })
 export class AuthModule {
   constructor(private store: Store<AppState>) {
-    store.dispatch(new fromAuth.CheckAuth());
+    // store.dispatch(new fromAuth.CheckAuth());
   }
 }

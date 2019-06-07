@@ -6,16 +6,13 @@ import { LoginComponent } from "./containers/login/login.component";
 import { SignupComponent } from "./containers/signup/signup.component";
 
 // Guards
-import { ChechAuthService } from './guards/chech-auth.service';
+import { ChechAuthService } from "./guards/chech-auth.service";
+
 
 const routes: Route[] = [
+  { path: "login", component: LoginComponent, canActivate: [ChechAuthService] },
   {
-    path: "login",
-    component: LoginComponent,
-    canActivate: [ChechAuthService]
-  },
-  {
-    path: "singup",
+    path: "signup",
     component: SignupComponent,
     canActivate: [ChechAuthService]
   }
