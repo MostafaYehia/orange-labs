@@ -12,6 +12,10 @@ import { ContactsPageComponent } from './containers/contacts-page/contacts-page.
 // Components
 import { ContactComponent } from './components/contact/contact.component';
 import { SharedModule } from '../shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import * as fromContact from './reducers/contact.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ContactEffects } from './effects/contact.effects';
 
 const COMPONENTS = [ContactsPageComponent, ContactComponent];
 
@@ -28,7 +32,9 @@ const routes: Route[] = [{
     ReactiveFormsModule,
     SharedModule,
     NgxSmartModalModule.forChild(),
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    StoreModule.forFeature('contact', fromContact.reducer),
+    EffectsModule.forFeature([ContactEffects])
   ],
   exports: [...COMPONENTS, RouterModule]
 })
