@@ -1,0 +1,147 @@
+.contact {
+  position: relative;
+  top: 0;
+  padding: 10px;
+  min-height: 240px;
+  background: rgb(63, 60, 70);
+  transition: top 0.5s ease-in-out;
+  border-radius: 5px;
+  box-shadow: 1px 2px 3px -1px black;
+  color: rgb(199, 199, 199);
+
+  &:hover {
+    top: -2px;
+  }
+
+  .contact__name {
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+    left: -5px;
+
+    span {
+      align-self: flex-start;
+      display: inline-block;
+      padding: 2px 5px;
+      background: #ff6600;
+      color: white;
+    }
+  }
+
+  .contact__controls__wrapper {
+    display: flex;
+    justify-content: flex-end;
+
+    i {
+      display: block;
+      margin: 0 0 0 10px;
+      cursor: pointer;
+
+      &.edit {
+        color: #17bb17;
+      }
+
+      &.delete {
+        color: #ff2222;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(1);
+      }
+    }
+  }
+
+  .contact__details__wrapper {
+    display: flex;
+    flex-flow: column wrap;
+    position: absolute;
+    bottom: 10px;
+    font-size: 0.7rem;
+
+    span {
+      display: inline-block;
+      margin-right: 7px;
+    }
+
+    label {
+      margin-bottom: 5px;
+    }
+  }
+
+  .edit__contact__form {
+    margin-top: 20px;
+
+    .contact__avatar__wrapper {
+      position: relative;
+      margin: 10px auto 15px auto;
+      --size: 100px;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: top center;
+      overflow: hidden;
+      box-shadow: -1px 3px 2px -1px black;
+
+      input {
+        display: block;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        padding: 7px 0;
+        bottom: 0;
+        opacity: 0;
+        z-index: 1;
+        cursor: pointer;
+
+        &:hover + .upload__btn {
+          background: #d45500;
+          color: #e0e0e0;
+        }
+
+        &:active + .upload__btn {
+          background: #c04d01;
+          color: #ececec;
+        }
+      }
+
+      .upload__btn {
+        display: block;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        padding: 7px 0;
+        bottom: 0;
+        background: rgba(142, 85, 0, 0.336);
+        color: #bbbbbb;
+        font-size: 12px;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+      }
+    }
+
+    .message {
+      display: block;
+      margin: 5px;
+      &.success {
+        color: green;
+      }
+
+      &.error {
+        color: red;
+      }
+    }
+    .edit__btn {
+      display: block;
+      border-color: green;
+      color: green;
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+}

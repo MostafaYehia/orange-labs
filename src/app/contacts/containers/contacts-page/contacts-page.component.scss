@@ -1,0 +1,97 @@
+:host {
+  display: block;
+  background: white;
+  width: 100%;
+
+  .contacts__controllers {
+    display: grid;
+    grid-template-columns: minmax(auto, 200px) auto minmax(100px, 200px);
+    justify-content: space-between;
+    align-items: center;
+    background: #ff6600;
+    padding: 10px;
+    width: 70%;
+    border-radius: 0.5rem;
+    margin: auto;
+
+    .new__contact__btn {
+
+      &:hover {
+        background: #fd7d27;
+      }
+
+      &:active {
+        background: #e95d00;
+      }
+    }
+
+    .sort__list {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      color: white;
+      button {
+        border-radius: 5px;
+        margin: 5px 2px;
+        font-size: 0.7rem;
+        background: rgb(221, 221, 221);
+        cursor: pointer;
+        &:hover {
+          background: rgb(255, 255, 255);
+        }
+
+        &.active {
+          background: rgb(63, 60, 70);
+          color: white;
+        }
+      }
+    }
+
+    .pagination__wrapper {
+      border-radius: 3px;
+      overflow: hidden;
+      justify-self: flex-end;
+
+      button {
+        background: rgb(221, 221, 221);
+        font-size: 1rem;
+        min-width: 30px;
+
+        &:hover {
+          background: white;
+        }
+
+        &:active {
+          background: rgb(199, 199, 199);
+        }
+      }
+    }
+  }
+
+  .contacts__wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    grid-gap: 1rem;
+    width: 70%;
+    margin: 50px auto;
+  }
+
+  .message {
+    display: block;
+    margin: 5px;
+    &.success {
+      color: green;
+    }
+
+    &.error {
+      color: red;
+    }
+  }
+  .add__btn {
+    display: block;
+    border-color: green;
+    color: green;
+    margin-top: 20px;
+    width: 100%;
+  }
+}

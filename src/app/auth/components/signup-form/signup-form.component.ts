@@ -26,17 +26,22 @@ export class SignupFormComponent implements OnInit {
         "",
         Validators.compose([Validators.required, Validators.email])
       ),
-      password: new FormControl("", Validators.compose([Validators.required]))
+      password: new FormControl("", Validators.compose([Validators.required])),
+      passwordConfirmation: new FormControl("", Validators.compose([Validators.required]))
     });
   }
 
   ngOnInit() {}
 
   signup() {
-    if (this.signupForm.valid) {
-      const data = this.signupForm.value;
-      this.store.dispatch(new AuthLoading());
-      this.store.dispatch(new Signup(data));
+    const formValue = this.signupForm.value;
+    if(formValue.password === formValue.passwordConfirmation ){
+
+      if (this.signupForm.valid) {
+        const data = this.signupForm.value;
+        this.store.dispatch(new AuthLoading());
+        this.store.dispatch(new Signup(data));
+      }
     }
   }
 }

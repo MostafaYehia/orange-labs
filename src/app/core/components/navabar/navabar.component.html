@@ -1,16 +1,11 @@
 <header class="container">
   <img
-    [routerLink]="['/main']"
+    [routerLink]="['/landing']"
     class="site__logo"
     src="../../../../assets/imgs/logo.png"
     width="50px"
     alt="o-labs-logo"
   />
-  <nav>
-    <ul class="nav__links">
-      <li *ngIf="loggedState$ | async"><a [routerLink]="['/contacts']">Contacts</a></li>
-    </ul>
-  </nav>
   <button *ngIf="loggedState$ | async" class="btn brand__btn outline navbar__right" (click)="logout()">
     Logout
   </button>

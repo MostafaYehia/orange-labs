@@ -15,17 +15,13 @@ const routes: Route[] = [
     children: [
       {
         path: "",
-        redirectTo: "main",
+        redirectTo: "contacts",
         pathMatch: "full"
       },
       {
-        path: "main",
-        component: MainPageComponent,
-        canActivate: [ChechAuthService]
-      },
-      {
         path: "contacts",
-        loadChildren: "./../contacts/contacts.module#ContactsModule"
+        loadChildren: "./../contacts/contacts.module#ContactsModule",
+        canActivate: [ChechAuthService]
       }
     ]
   }

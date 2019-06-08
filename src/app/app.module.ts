@@ -6,6 +6,8 @@ import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AuthModule } from "./auth/auth.module";
 import { SharedModule } from './shared/shared.module';
+import { NgxSmartModalModule } from "ngx-smart-modal";
+
 
 // NgRx Modules ( State management )
 import { StoreModule } from "@ngrx/store";
@@ -52,7 +54,8 @@ const COMPONENTS = [
     // Connects RouterModule with StoreModule
     StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer }),
     // Store Dev tools visual state tracking using Redux Devtools
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    NgxSmartModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

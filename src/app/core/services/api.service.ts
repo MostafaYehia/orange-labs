@@ -1,13 +1,10 @@
 import { Injectable, OnDestroy } from "@angular/core";
-import { AppState } from "src/app/ngrx-store/reducers";
-import { Store } from "@ngrx/store";
-import { tokenState } from "../../auth/selectors";
 import { Subscription } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
-export class ApiService implements OnDestroy {
+export class ApiService {
   baseUrl = "http://localhost:3000";
   token: string | null = null;
   subs: Subscription[] = [];
@@ -20,13 +17,8 @@ export class ApiService implements OnDestroy {
     contacts: `${this.baseUrl}/api/contacts`
   };
 
-  constructor(private store: Store<AppState>) {
-    this.subs.push(
-      this.store.select(tokenState).subscribe(token => (this.token = token))
-    );
+  constructor() {
   }
 
-  ngOnDestroy() {
-    this.subs.forEach(sub => sub.unsubscribe());
-  }
+
 }

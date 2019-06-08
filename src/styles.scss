@@ -1,3 +1,8 @@
+$color-overlay: rgba(32, 15, 9, 0.829);
+@import "~ngx-smart-modal/ngx-smart-modal";
+$ionicons-font-path: "~ionicons/dist/fonts";
+@import "~ionicons/dist/scss/ionicons.scss";
+
 /* You can add global styles to this file, and also import other style files */
 *,
 *::before,
@@ -13,10 +18,13 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
-  background: lightblue;
 
   .container {
     padding: 0 20px;
+  }
+
+  .page__wrapper {
+    margin-top: 100px;
   }
 
   a {
@@ -106,5 +114,12 @@ body {
     }
   }
 
+  .ng-valid.ng-dirty:not(form) {
+    border: solid 1px lightgreen;
+  }
+  
+  .ng-invalid.ng-dirty:not(form), .ng-invalid:not(form).form-submitted {
+    border: solid 1px lightcoral;
+  }
 
 }

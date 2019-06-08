@@ -6,7 +6,7 @@ const authState = createFeatureSelector<AuthState>("auth");
 // Get User Token
 export const tokenState = createSelector(
   authState,
-  (state: AuthState) => state.user.token
+  (state: AuthState) => (state.user ? state.user.token : null)
 );
 
 // Logged in state
