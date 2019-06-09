@@ -1,0 +1,127 @@
+<h3>Edit Contact</h3>
+<form class="form edit__contact__form" [formGroup]="editContactForm">
+  <!-- Avatar -->
+  <div
+    class="form__group contact__avatar__wrapper"
+    [ngStyle]="{ backgroundImage: 'url(' + contact?.avatars?.medium + ')' }"
+  >
+    <input type="file" name="avatar" (change)="onAvatarSelect($event)" />
+    <button class="btn upload__btn">Change</button>
+  </div>
+  <ng-container *ngIf="editContactSubmited">
+    <small
+      class="message error"
+      *ngIf="editFormControls.avatar.errors?.requiredFileTypes"
+      >only jpg,jpeg and png</small
+    >
+  </ng-container>
+  <small
+    class="message"
+    [ngClass]="{
+      success: updateMessage.type == 'success',
+      error: updateMessage.type == 'error'
+    }"
+    *ngIf="updateMessage.body"
+    >{{ updateMessage.body }}</small
+  >
+
+  <!-- First Name -->
+  <div class="form__group">
+    <label for="contact__firstName">firstName</label>
+    <input
+      type="text"
+      name="edit_firstName"
+      maxlength="30"
+      placeholder="Enter your first name"
+      formControlName="firstName"
+    />
+    <ng-container *ngIf="editContactSubmited">
+      <small
+        class="message error"
+        *ngIf="editFormControls.firstName.errors?.required"
+        >firstName is required</small
+      >
+      <small
+        class="message error"
+        *ngIf="editFormControls.firstName.errors?.pattern"
+        >Only alphabets and spaces are allowed</small
+      >
+    </ng-container>
+  </div>
+  <!-- Last Name -->
+  <div class="form__group">
+    <label for="contact__lastName">lastName</label>
+    <input
+      type="text"
+      name="edit_lastName"
+      maxlength="30"
+
+      placeholder="Enter your last name"
+      formControlName="lastName"
+    />
+    <ng-container *ngIf="editContactSubmited">
+      <small
+        class="message error"
+        *ngIf="editFormControls.lastName.errors?.required"
+        >firstName is required</small
+      >
+      <small
+        class="message error"
+        *ngIf="editFormControls.lastName.errors?.pattern"
+        >Only alphabets and spaces are allowed</small
+      >
+    </ng-container>
+  </div>
+  <!-- Email -->
+  <div class="form__group">
+    <label for="email">Email</label>
+    <input
+      type="text"
+      name="edit_email"
+      placeholder="Enter your email address"
+      formControlName="email"
+    />
+    <ng-container *ngIf="editContactSubmited">
+      <small
+        class="message error"
+        *ngIf="editFormControls.email.errors?.required"
+        >Email is required</small
+      >
+      <small
+        class="message error"
+        *ngIf="
+          editFormControls.email.dirty && editFormControls.email.errors?.email
+        "
+        >Invalid email address</small
+      >
+    </ng-container>
+  </div>
+  <!-- Phone -->
+  <div class="form__group">
+    <label for="contact_phone">Phone</label>
+    <input
+      type="text"
+      name="edit_phone"
+      placeholder="Enter your phone number"
+      formControlName="phone"
+    />
+    <ng-container *ngIf="editContactSubmited">
+      <small
+        class="message error"
+        *ngIf="editFormControls.phone.errors?.required"
+        >Phone number is required</small
+      >
+      <small
+        class="message error"
+        *ngIf="
+          editFormControls.phone.dirty &&
+          editFormControls.phone.errors?.pattern
+        "
+        >Invalid phone number</small
+      >
+    </ng-container>
+  </div>
+  <button class="btn brand__btn outline edit__btn" (click)="editContact()">
+    Edit
+  </button>
+</form>

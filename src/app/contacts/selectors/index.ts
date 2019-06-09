@@ -41,10 +41,11 @@ export const getAllContacts = createSelector(
   (state: ContactsState, sortType: string, currentPage: number): Contact[] => {
     const result = [];
     const contacts = state.entities;
+    let ids: string[] | number[] = state.ids;
+    let skip = (currentPage - 1) * 10;
 
-    if (contacts) {
-      let ids: string[] | number[]  = state.ids;
-      let skip = ids.length <= 10 ? 0 : (currentPage - 1) * 10;
+    if (ids.length) {
+      console.log("Skip: ", skip)
       const skipped = state.ids.slice(skip, skip + 10);
       for (const id of skipped) {
         result.push(contacts[id]);
