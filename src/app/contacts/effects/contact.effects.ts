@@ -6,9 +6,17 @@ import { Action } from "@ngrx/store";
 import { switchMap, map, catchError } from "rxjs/operators";
 import { ContactsApiService } from "../services/contacts-api.service";
 import { NgxSmartModalService } from "ngx-smart-modal";
+import { NgxNotificationService } from "ngx-notification";
 
 @Injectable()
 export class ContactEffects {
+  constructor(
+    private actions$: Actions,
+    public ngxSmartModalService: NgxSmartModalService,
+    private ngxNotificationService: NgxNotificationService,
+    private contactsApi: ContactsApiService
+  ) {}
+
   // Load Contacts
   @Effect()
   loadContacts$: Observable<Action> = this.actions$.pipe(
@@ -16,6 +24,7 @@ export class ContactEffects {
     switchMap((action: fromContacts.LoadContacts) => {
       return this.contactsApi.getContacts(action.payload).pipe(
         switchMap((res: any) => {
+
           return [
             new fromContacts.AddContacts({ contacts: res.contacts }),
             new fromContacts.TotalPages(res.totalPages)
@@ -37,6 +46,7 @@ export class ContactEffects {
         switchMap((res: any) => {
           console.log("Contact has been added successfully!");
           // Show notification
+          this.ngxNotificationService.sendMessage('Contact has been added!', 'success', 'bottom-left');
           this.ngxSmartModalService.get("addContactModal").close();
           return [
             new fromContacts.ContactAdded({ contact: res.contact }),
@@ -61,11 +71,8 @@ export class ContactEffects {
       // Remove _id before sending
       return this.contactsApi.editContact(id, data).pipe(
         switchMap((res: any) => {
-          console.log("Contact has been updated successfully!");
+          this.ngxNotificationService.sendMessage('Contact has been updated successfully!', 'success', 'bottom-left');
 
-
-          console.log("id Before", id)
-          console.log("id after", res.contact._id)
           // Show notification
           return [
             new fromContacts.ContactUpdated({
@@ -78,7 +85,6 @@ export class ContactEffects {
           ];
         }),
         catchError(err => {
-          console.log("err", err);
           return of(new fromContacts.ContactsError(err.error.message));
         })
       );
@@ -93,6 +99,9 @@ export class ContactEffects {
       return this.contactsApi.deleteContact(action.payload).pipe(
         switchMap((res: any) => {
           // Show notification
+
+          this.ngxNotificationService.sendMessage('Contact has been deleted successfully!', 'success', 'bottom-left');
+
           return [
             new fromContacts.ContactDeleted({ id: `${action.payload}` }),
             new fromContacts.TotalPages(res.totalPages)
@@ -105,10 +114,4 @@ export class ContactEffects {
       );
     })
   );
-
-  constructor(
-    private actions$: Actions,
-    public ngxSmartModalService: NgxSmartModalService,
-    private contactsApi: ContactsApiService
-  ) {}
 }

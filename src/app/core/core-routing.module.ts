@@ -3,10 +3,10 @@ import { Routes, RouterModule, Route } from "@angular/router";
 
 // Containers
 import { AppShellComponent } from "./containers/app-shell/app-shell.component";
-import { MainPageComponent } from "./containers/main-page/main-page.component";
 
 // Guards
-import { ChechAuthService } from '../auth/guards/chech-auth.service';
+import { ChechAuthGuard } from '../auth/guards/chech-auth.service';
+import { MainPageComponent } from './containers/main-page/main-page.component';
 
 const routes: Route[] = [
   {
@@ -15,13 +15,18 @@ const routes: Route[] = [
     children: [
       {
         path: "",
-        redirectTo: "contacts",
+        redirectTo: "main",
         pathMatch: "full"
+      },
+      {
+        path: "main",
+        component: MainPageComponent,
+        canActivate: [ChechAuthGuard]
       },
       {
         path: "contacts",
         loadChildren: "./../contacts/contacts.module#ContactsModule",
-        canActivate: [ChechAuthService]
+        canActivate: [ChechAuthGuard]
       }
     ]
   }

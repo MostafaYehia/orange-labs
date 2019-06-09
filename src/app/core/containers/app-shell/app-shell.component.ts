@@ -4,7 +4,7 @@ import { Component, OnInit } from "@angular/core";
   selector: "app-app-shell",
   template: `
     <app-navbar></app-navbar>
-    <main class="page__wrapper">
+    <main>
       <router-outlet></router-outlet>
     </main>
   `,

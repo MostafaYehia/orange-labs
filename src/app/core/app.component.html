@@ -1,2 +1,6 @@
-<div class="unverified__message" *ngIf="isVerified$ | async">Check your email address to verify your account!</div>
+<div class="unverified__message" *ngIf="showNoticeMessage$ | async">
+  Check your email address to verify your account!,
+  <span (click)="resendActivationEmail()">Resend</span>
+</div>
+<lib-ngx-notification></lib-ngx-notification>
 <router-outlet></router-outlet>

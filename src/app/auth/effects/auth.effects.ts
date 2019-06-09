@@ -15,6 +15,7 @@ import { AuthApiService } from "../services/auth-api.service";
 import { LocalStorageService } from "../services/localStorage.service";
 import { Action } from "@ngrx/store";
 import { Router } from "@angular/router";
+import { NgxNotificationService } from "ngx-notification";
 
 @Injectable({ providedIn: "root" })
 export class AuthEffects {
@@ -23,6 +24,7 @@ export class AuthEffects {
   constructor(
     private authApi: AuthApiService,
     private router: Router,
+    private ngxNotificationService: NgxNotificationService,
     private secureStorage: LocalStorageService,
     private actions$: Actions<AuthActions>
   ) {}
@@ -33,17 +35,20 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOAD_USER),
     switchMap(() => {
       // Load user
-      const user = this.secureStorage.getItem(this.userDataKey);
-      const token = user ? user.token : null;
+      const loadedUser = this.secureStorage.getItem(this.userDataKey);
+
+      const token = loadedUser ? loadedUser.token : null;
 
       return this.authApi.checkAuth(token).pipe(
         map(res => {
           // Store new backend user state
 
-          const newData = {
-            token,
-            user: { ...user, isVerified: res.isVerified }
+          const newData: any = {
+            ...loadedUser,
+            user: { ...loadedUser.user, isVerified: res.isVerified }
           };
+
+          console.log("Loaded data:", newData)
 
           this.secureStorage.storeItem(this.userDataKey, newData);
           return new LoginSuccess(newData);
@@ -62,6 +67,7 @@ export class AuthEffects {
     switchMap((action: any) => {
       return this.authApi.login(action.payload).pipe(
         map(res => {
+          console.log("Store these data", res);
           this.secureStorage.storeItem(this.userDataKey, res);
           this.router.navigate(["/main"]);
           return new LoginSuccess(res);
@@ -84,6 +90,30 @@ export class AuthEffects {
           // Show that you need to verify your account
           this.secureStorage.storeItem(this.userDataKey, res);
           return new SignupSuccess(res);
+        }),
+        catchError(err => {
+          return of(
+            new AuthError({ type: "signup", message: err.error.message })
+          );
+        })
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  activationEmail$ = this.actions$.pipe(
+    ofType(AuthActionTypes.RESEND_ACTIVATION_EMAIL),
+    switchMap((action: any) => {
+      const token = this.authApi.token;
+      console.log("Send email with this token", token);
+      return this.authApi.resendActivation(token).pipe(
+        map(res => {
+          // Show that you need to verify your account
+          this.ngxNotificationService.sendMessage(
+            "New email has been sent",
+            "success",
+            "bottom-right"
+          );
         }),
         catchError(err => {
           return of(

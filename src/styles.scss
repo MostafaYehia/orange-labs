@@ -24,7 +24,7 @@ body {
   }
 
   .page__wrapper {
-    margin-top: 100px;
+    padding-top: 100px;
   }
 
   a {
@@ -91,12 +91,18 @@ body {
       flex-flow: column wrap;
       margin-bottom: 0.5rem;
 
+      label {
+        color: rgb(94, 94, 94);
+        font-size: 0.8rem;
+      }
+
       input {
         padding: 7px;
-        border: none;
+        border: 1px solid rgb(226, 226, 226);;
         border-radius: 0.2rem;
         margin: 5px 0;
         background: rgba(255, 255, 255, 0.8);
+        min-width: 100%;
       }
     }
   }
@@ -134,5 +140,13 @@ body {
   .ng-invalid.ng-dirty:not(form),
   .ng-invalid:not(form).form-submitted {
     border: solid 1px lightcoral;
+  }
+
+  .ngx-notification {
+    position: absolute;
+    background-color: #ff3300;
+    color: wheat;
+    color: #c9c9c9;
+    bottom: 50px;
   }
 }

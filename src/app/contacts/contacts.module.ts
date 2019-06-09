@@ -20,6 +20,7 @@ import { AddContactFormComponent } from "./components/add-contact-form/add-conta
 import { EditContactFormComponent } from "./components/edit-contact-form/edit-contact-form.component";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizationInterceptorService } from '../auth/interceptors/authorization-interceptor.service';
+import { IsVerifiedGuard } from '../auth/guards/is-verified.service';
 
 const COMPONENTS = [
   ContactsPageComponent,
@@ -31,7 +32,8 @@ const COMPONENTS = [
 const routes: Route[] = [
   {
     path: "",
-    component: ContactsPageComponent
+    component: ContactsPageComponent,
+    canActivate: [IsVerifiedGuard]
   }
 ];
 

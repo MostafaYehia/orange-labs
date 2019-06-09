@@ -1,13 +1,18 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { LoadingIconComponent } from './components/loading-icon/loading-icon.component';
-
-// Components
-import { NavabarComponent } from "../core/components/navabar/navabar.component";
 import { CommonModule } from "@angular/common";
 
 // Components
-const COMPONENTS = [NavabarComponent, LoadingIconComponent];
+import { NgxNotificationComponent } from 'ngx-notification';
+import { NavabarComponent } from "../core/components/navabar/navabar.component";
+import { LoadingIconComponent } from "./components/loading-icon/loading-icon.component";
+
+// Components
+const COMPONENTS = [
+  NavabarComponent,
+  LoadingIconComponent,
+  NgxNotificationComponent
+];
 
 @NgModule({
   declarations: [...COMPONENTS],

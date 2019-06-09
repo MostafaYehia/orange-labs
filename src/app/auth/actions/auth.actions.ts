@@ -7,6 +7,8 @@ export enum AuthActionTypes {
   LOAD_USER_SUCCESS = "[Auth] Load User Success",
   LOAD_USER_FAILD = "[Auth] Load User Faild",
 
+  RESEND_ACTIVATION_EMAIL = "[Auth] Resend Activation Email",
+
   LOGIN = "[Auth] Login",
   LOGIN_SUCCESS = "[Auth] Login Success",
 
@@ -118,6 +120,14 @@ export class AuthError implements Action {
   constructor(public payload: { type: string; message: string }) {}
 }
 
+/**
+ * Resend Activation Email
+ */
+export class ActivationEmail implements Action {
+  readonly type = AuthActionTypes.RESEND_ACTIVATION_EMAIL;
+  constructor() {}
+}
+
 export type AuthActions =
   | CheckAuth
   | LoadUser
@@ -129,4 +139,5 @@ export type AuthActions =
   | Logout
   | Loggedout
   | AuthLoading
-  | AuthError;
+  | AuthError
+  | ActivationEmail

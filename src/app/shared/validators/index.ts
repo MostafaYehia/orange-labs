@@ -59,7 +59,7 @@ export const passwordPatter = minLength => {
 
       if (hasDigit && hasSymbol && hasUpperCaseLetter && password.length >= 8)
         notValid = false;
-        
+
       if (notValid)
         return {
           requiredPattern: passowrdPattern
@@ -69,19 +69,32 @@ export const passwordPatter = minLength => {
     }
   };
 };
-export const validNamePatter = () => {
-  return function(control: FormControl) {
-    const name = control.value;
-    const pattern = /^([a-zA-z\s]{1,30})$/g;
+export const validNamePatter = (control: FormControl) => {
+  const name = control.value;
+  const pattern = /^([a-zA-z\s]{1,30})$/g;
 
-    if (name) {
-      if (!pattern.test(name)) {
-        return {
-          invalidPattern: true
-        };
-      }
+  if (name) {
+    if (!pattern.test(name)) {
+      return {
+        invalidPattern: true
+      };
     }
+  }
 
-    return null;
-  };
+  return null;
+};
+
+export const validPhoneNumber = (control: FormControl) => {
+  const phone = control.value;
+  const pattern = /(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]‌​)\s*)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)([2-9]1[02-9]‌​|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})\s*(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+)\s*)?$/g;
+
+  if (phone) {
+    if (!pattern.test(phone)) {
+      return {
+        invalidPattern: true
+      };
+    }
+  }
+
+  return null;
 };

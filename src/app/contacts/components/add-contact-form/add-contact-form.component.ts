@@ -6,6 +6,7 @@ import { map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import * as fromContacts from "../../actions/contact.actions";
+import { validPhoneNumber } from 'src/app/shared/validators';
 
 @Component({
   selector: "app-add-contact-form",
@@ -45,6 +46,7 @@ export class AddContactFormComponent implements OnInit {
       phone: new FormControl(
         "",
         Validators.compose([Validators.required, Validators.maxLength(30)])
+        // Validators.compose([Validators.required, Validators.maxLength(30), validPhoneNumber])
       )
     });
   }

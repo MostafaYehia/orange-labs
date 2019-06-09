@@ -60,7 +60,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.store.select(isLoggedInState).subscribe(loggedIn => {
         if (loggedIn) {
-          this.router.navigate(["/contacts"]);
+          this.router.navigate(["/main"]);
         }
       })
     );

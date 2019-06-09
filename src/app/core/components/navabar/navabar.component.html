@@ -6,11 +6,24 @@
     width="50px"
     alt="o-labs-logo"
   />
-  <button *ngIf="loggedState$ | async" class="btn brand__btn outline navbar__right" (click)="logout()">
-    Logout
-  </button>
+  <div>
+    <button [routerLink]="['/contacts']" *ngIf="loggedState$ | async" class="btn brand__btn navbar__right">
+      Manage Contacts
+    </button>
+    <button
+      *ngIf="loggedState$ | async"
+      class="btn brand__btn outline navbar__right"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  </div>
 
-  <button *ngIf="!(loggedState$ | async)" [routerLink]="['/login']" class="btn brand__btn outline navbar__right">
+  <button
+    *ngIf="!(loggedState$ | async)"
+    [routerLink]="['/login']"
+    class="btn brand__btn outline navbar__right"
+  >
     Login
   </button>
 </header>

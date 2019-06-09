@@ -11,7 +11,7 @@ import { tap, map, catchError } from "rxjs/operators";
   providedIn: "root"
 })
 @Injectable()
-export class ChechAuthService implements CanActivate {
+export class ChechAuthGuard implements CanActivate {
   constructor(private router: Router, private store: Store<AppState>) {}
 
   canActivate(): Observable<boolean> {

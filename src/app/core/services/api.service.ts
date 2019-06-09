@@ -12,6 +12,7 @@ export class ApiService {
   urls = {
     login: `${this.baseUrl}/auth/login`,
     signup: `${this.baseUrl}/auth/signup`,
+    resendActivationEmail: `${this.baseUrl}/auth/activation/resend`,
     checkAuth: `${this.baseUrl}/auth/check`,
 
     contacts: `${this.baseUrl}/api/contacts`

@@ -89,9 +89,9 @@
         <small
           class="message error"
           *ngIf="
-            addFormControls.phone.dirty && addFormControls.phone.errors?.pattern
+            addFormControls.phone.dirty && addFormControls.phone.errors?.invalidPattern
           "
-          >Invalid phone number</small
+          >Invalid phone number, ex: (+201200127078 or 800 555 1212)</small
         >
       </ng-container>
     </div>

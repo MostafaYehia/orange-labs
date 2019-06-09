@@ -1,12 +1,28 @@
 :host {
     .unverified__message {
         display: block;
-        position: sticky;
-        top: 0;
-        background: rgb(0, 156, 65);
-        color: white;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        background: rgba(0, 156, 65, 0.7);
+        color: rgb(241, 241, 241);
         text-align: center;
         font-size: 0.8rem;
         padding: 2px 0;
+        z-index: 1000;
+
+        span {
+            color: rgb(247, 247, 247);
+            text-decoration: underline;
+            cursor: pointer;
+
+            &:hover {
+                color: rgb(255, 255, 255);
+            }
+
+            &:active {
+                color: rgb(235, 235, 235);
+            }
+        }
     }
 }

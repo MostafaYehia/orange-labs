@@ -18,7 +18,21 @@ export const isLoggedInState = createSelector(
 // Get User Account verification state
 export const isVerifiedState = createSelector(
   authState,
-  (state: AuthState) => state.user && !state.user.data["isVerified"]
+  (state: AuthState) => state.user && state.user.data["isVerified"]
+);
+
+// Get User Account verification state
+export const showVerifyMessageState = createSelector(
+  authState,
+  isLoggedInState,
+  (state: AuthState, loggedIn: Boolean) =>
+    loggedIn && !state.user.data["isVerified"]
+);
+
+// Get Current User
+export const getCurrentUser = createSelector(
+  authState,
+  (state: AuthState) => state.user.data
 );
 
 // Get Loading State

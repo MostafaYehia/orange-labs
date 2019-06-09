@@ -10,30 +10,15 @@
     justify-content: space-between;
     align-items: center;
     color: hsl(0, 0%, 100%);
-
+    box-shadow: 1px -1px 2px 1px black;
+    
     .site__logo {
         position: relative;
       top: 5px;
     }
 
-    nav {
-      .nav__links {
-        list-style: none;
-
-        li {
-          display: inline-block;
-          padding: 0 10px;
-
-          a {
-            color: white;
-            transition: color 0.3s ease-in-out;
-
-            &:hover {
-              color: #ff6600;
-            }
-          }
-        }
-      }
+    button {
+      margin-left: 5px;
     }
   }
 }

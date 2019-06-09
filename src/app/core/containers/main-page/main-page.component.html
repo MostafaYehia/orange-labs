@@ -1,1 +1,15 @@
-<h1>Main page</h1>
+<main>
+  <div class="welcome__message" *ngIf="currentUser$ | async as user">
+    <h1>Hello,{{user.username}}</h1>
+    <h3>Welcome to O-Labs</h3>
+    <p>
+      <small>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam 
+          vitae temporibus id sit natus excepturi iure voluptate minima nobis facere!
+      </small>
+    </p>
+  </div>
+</main>
+<!-- Overlay -->
+<span class="slider__overlay"></span>
+<div class="background">1</div>

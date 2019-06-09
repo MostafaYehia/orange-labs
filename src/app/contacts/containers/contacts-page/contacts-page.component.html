@@ -1,57 +1,60 @@
-<div class="contacts__controllers">
-  <!-- Sort options -->
-  <div class="sort__list">
-    <small>Sort: </small>
-    <button
-      class="btn"
-      (click)="sortBy = 'firstName'; sortContacts()"
-      [ngClass]="{ active: sortBy == 'firstName' }"
-    >
-      First Name
-    </button>
-    <button
-      class="btn"
-      (click)="sortBy = 'lastName'; sortContacts()"
-      [ngClass]="{ active: sortBy == 'lastName' }"
-    >
-      Last Name
-    </button>
-  </div>
-  <!-- Add new Contact -->
-  <button
-    class="btn brand__btn new__contact__btn"
-    (click)="addContactModal.open()"
-  >
-    <i class="icon ion-md-add edit"></i>
-    Add new contact
-  </button>
+<div class="page__wrapper">
+    <div class="contacts__controllers">
+        <!-- Sort options -->
+        <div class="sort__list">
+          <small>Sort: </small>
+          <button
+            class="btn"
+            (click)="sortBy = 'firstName'; sortContacts()"
+            [ngClass]="{ active: sortBy == 'firstName' }"
+          >
+            First Name
+          </button>
+          <button
+            class="btn"
+            (click)="sortBy = 'lastName'; sortContacts()"
+            [ngClass]="{ active: sortBy == 'lastName' }"
+          >
+            Last Name
+          </button>
+        </div>
+        <!-- Add new Contact -->
+        <button
+          class="btn brand__btn new__contact__btn"
+          (click)="addContactModal.open()"
+        >
+          <i class="icon ion-md-add edit"></i>
+          Add new contact
+        </button>
+      </div>
+      <!-- Pagination -->
+      <div class="pagination__wrapper" *ngIf="totalPages > 1">
+        <small class="page__counter">{{ currentPage }} of {{ totalPages }}</small>
+        <button class="btn pagination__btn" (click)="prevPage()">
+          <i class="icon ion-md-arrow-dropleft"></i>
+        </button>
+        <button class="btn pagination__btn" (click)="nextPage()">
+          <i class="icon ion-md-arrow-dropright"></i>
+        </button>
+      </div>
+      <div
+        class="contacts__wrapper"
+        *ngIf="contacts.length; else noContacts"
+        [@showContactsAnim]="contacts.length"
+      >
+        <app-contact
+          *ngFor="let contact of contacts"
+          [contact]="contact"
+        ></app-contact>
+      </div>
+      <ng-template #noContacts>
+        <div class="no__contacts__message">
+          <p (click)="addContactModal.open()">You have no contacts, start adding</p>
+        </div>
+      </ng-template>
+      
+      <ngx-smart-modal #addContactModal identifier="addContactModal">
+        <app-add-contact-form></app-add-contact-form>
+      </ngx-smart-modal>
+      
 </div>
-<!-- Pagination -->
-<div class="pagination__wrapper" *ngIf="totalPages > 1">
-  <small class="page__counter">{{ currentPage }} of {{ totalPages }}</small>
-  <button class="btn pagination__btn" (click)="prevPage()">
-    <i class="icon ion-md-arrow-dropleft"></i>
-  </button>
-  <button class="btn pagination__btn" (click)="nextPage()">
-    <i class="icon ion-md-arrow-dropright"></i>
-  </button>
-</div>
-<div
-  class="contacts__wrapper"
-  *ngIf="contacts.length; else noContacts"
-  [@showContactsAnim]="contacts.length"
->
-  <app-contact
-    *ngFor="let contact of contacts"
-    [contact]="contact"
-  ></app-contact>
-</div>
-<ng-template #noContacts>
-  <div class="no__contacts__message">
-    <p (click)="addContactModal.open()">You have no contacts, start adding</p>
-  </div>
-</ng-template>
-
-<ngx-smart-modal #addContactModal identifier="addContactModal">
-  <app-add-contact-form></app-add-contact-form>
-</ngx-smart-modal>
