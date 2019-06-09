@@ -45,8 +45,7 @@ export class AddContactFormComponent implements OnInit {
       ),
       phone: new FormControl(
         "",
-        Validators.compose([Validators.required, Validators.maxLength(30)])
-        // Validators.compose([Validators.required, Validators.maxLength(30), validPhoneNumber])
+        Validators.compose([Validators.required, Validators.maxLength(30), validPhoneNumber])
       )
     });
   }
