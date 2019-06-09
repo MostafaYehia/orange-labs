@@ -8,7 +8,11 @@ import { ActivatedRoute } from "@angular/router";
 import { AppState } from "src/app/ngrx-store/reducers";
 import { Store } from "@ngrx/store";
 import * as fromContacts from "../../actions/contact.actions";
-import { getAllContacts, getTotalPagesCount } from "../../selectors";
+import {
+  getAllContacts,
+  getTotalPagesCount,
+  getCurrentPage
+} from "../../selectors";
 import { fadeInUp } from "../../../shared/animations";
 
 @Component({
@@ -47,9 +51,16 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
       this.store.select(getAllContacts).subscribe(contacts => {
         this.contacts = [];
         setTimeout(() => {
-          this.contacts = [...contacts]
+          this.contacts = [...contacts];
         }, 0);
       })
+    );
+
+    this.subs.push(
+      // Get Current page
+      this.store
+        .select(getCurrentPage)
+        .subscribe(page => (this.currentPage = page))
     );
 
     this.subs.push(

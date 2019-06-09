@@ -26,6 +26,8 @@ export class SignupComponent implements OnInit, OnDestroy {
     );
   }
 
+
+
   ngOnDestroy() {
     this.subs.forEach(sub => sub.unsubscribe());
   }

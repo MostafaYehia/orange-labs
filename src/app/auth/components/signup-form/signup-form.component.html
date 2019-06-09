@@ -13,6 +13,13 @@
       placeholder="Enter a username"
       formControlName="username"
     />
+    <ng-container *ngIf="signupSubmited">
+      <small
+        class="message error"
+        *ngIf="signupFormControls.username.errors?.required"
+        >Username is required</small
+      >
+    </ng-container>
   </div>
   <div class="form__group">
     <label for="email">Email</label>
@@ -21,6 +28,21 @@
       placeholder="Enter your email address"
       formControlName="email"
     />
+    <ng-container *ngIf="signupSubmited">
+      <small
+        class="message error"
+        *ngIf="signupFormControls.email.errors?.required"
+        >Email is required</small
+      >
+      <small
+        class="message error"
+        *ngIf="
+          signupFormControls.email.dirty &&
+          signupFormControls.email.errors?.email
+        "
+        >Invalid email address</small
+      >
+    </ng-container>
   </div>
   <div class="form__group">
     <label for="password">Password</label>
@@ -29,6 +51,44 @@
       placeholder="Enter your password"
       formControlName="password"
     />
+    <ng-container *ngIf="signupSubmited">
+      <ul>
+        <li
+          class="message error"
+          *ngIf="signupFormControls.password.errors?.required"
+        >
+          Passoword is required
+        </li>
+        <li
+          class="message error"
+          *ngIf="signupFormControls.password.errors?.requiredPattern?.hasDigit"
+        >
+          Shoul has on digit
+        </li>
+        <li
+          class="message error"
+          *ngIf="
+            signupFormControls.password.errors?.requiredPattern
+              ?.hasUpperCaseLetter
+          "
+        >
+          Should has one uppercase letter
+        </li>
+
+        <li
+          class="message error"
+          *ngIf="signupFormControls.password.errors?.requiredPattern?.hasSymbol"
+        >
+          Should has one special character
+        </li>
+        <li
+          class="message error"
+          *ngIf="signupFormControls.password.errors?.requiredPattern?.minLength"
+        >
+          Min length is 8
+        </li>
+      </ul>
+    </ng-container>
   </div>
   <div class="form__group">
     <label for="password">Confirm Password</label>
@@ -37,9 +97,18 @@
       placeholder="Confirm your password"
       formControlName="passwordConfirmation"
     />
+    <ng-container *ngIf="signupSubmited">
+      <small
+        class="message error"
+        *ngIf="signupFormControls.passwordConfirmation.errors?.required"
+      >
+        You should confirm your password
+      </small>
+      <small class="message error" *ngIf="passwordConfirmationError">
+        Not identical
+      </small>
+    </ng-container>
   </div>
-
-
 
   <!-- Login -->
   <a class="notice form__try__login" [routerLink]="['/login']"

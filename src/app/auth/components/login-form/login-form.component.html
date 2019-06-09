@@ -1,17 +1,47 @@
 <h1 class="auth__title">Login</h1>
 <span class="auth__message" *ngIf="authLoading$ | async">Loading...</span>
-<small class="auth__message error" *ngIf="loginError$ | async as errorMessage">{{errorMessage}}</small>
+<small
+  class="auth__message error"
+  *ngIf="loginError$ | async as errorMessage"
+  >{{ errorMessage }}</small
+>
 <form class="form login__form" [formGroup]="loginForm" (ngSubmit)="login()">
-    <div class="form__group">
-        <label for="email">Email</label>
-        <input type="text" name="login_email" placeholder="Enter your email address" formControlName="email">
-    </div>
-    <div class="form__group">
-        <label for="password">Password</label>
-        <input type="password" name="login_password" placeholder="Enter your password" formControlName="password">
-    </div>
-    <!-- Create new account -->
-    <a class="notice form__create_acount"  [routerLink]="['/signup']"><small>Create new account?</small></a>
+  <div class="form__group">
+    <label for="email">Email</label>
+    <input
+      type="text"
+      name="login_email"
+      placeholder="Enter your email address"
+      formControlName="email"
+    />
+    <ng-container *ngIf="loginSubmited">
+      <small
+        class="message error"
+        *ngIf="loginFormControls.email.errors?.required"
+        >Email is required</small
+      >
+      <small
+        class="message error"
+        *ngIf="
+          loginFormControls.email.dirty && loginFormControls.email.errors?.email
+        "
+        >Invalid email address</small
+      >
+    </ng-container>
+  </div>
+  <div class="form__group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      name="login_password"
+      placeholder="Enter your password"
+      formControlName="password"
+    />
+  </div>
+  <!-- Create new account -->
+  <a class="notice form__create_acount" [routerLink]="['/signup']"
+    ><small>Create new account?</small></a
+  >
 
-    <button class="btn brand__btn outline large login__btn">Go</button>
+  <button class="btn brand__btn outline large login__btn">Go</button>
 </form>

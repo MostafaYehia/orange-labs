@@ -1,4 +1,4 @@
-import { FormControl } from "@angular/forms";
+import { FormControl, AbstractControl } from "@angular/forms";
 
 export const requiredFileTypes = (types: string[]) => {
   return function(control: FormControl) {
@@ -19,12 +19,62 @@ export const requiredFileTypes = (types: string[]) => {
   };
 };
 
+export const confirmedPassword = (
+  control: AbstractControl
+): { [key: string]: boolean } => {
+  const password = control.get("password").value;
+  const passwordConfirmation = control.get("passwordConfirmation").value;
+  if (password && passwordConfirmation) {
+    if (password !== passwordConfirmation) {
+      return {
+        notIdentical: true
+      };
+    }
+
+    return null;
+  }
+
+  return null;
+};
+
+export const passwordPatter = minLength => {
+  return (control: FormControl) => {
+    const password = control.value;
+    if (password) {
+      const hasUpperCaseLetter = /(?=.*[A-Z])/.test(password);
+      const hasDigit = /(?=.*\d)/.test(password);
+      const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+      const passowrdPattern = {
+        hasUpperCaseLetter: null,
+        hasDigit: null,
+        hasSymbol: null,
+        minLength: null
+      };
+
+      let notValid = true;
+      if (!hasUpperCaseLetter) passowrdPattern["hasUpperCaseLetter"] = true;
+      if (!hasDigit) passowrdPattern["hasDigit"] = true;
+      if (!hasSymbol) passowrdPattern["hasSymbol"] = true;
+      if (password.length < minLength) passowrdPattern["minLength"] = true;
+
+      if (hasDigit && hasSymbol && hasUpperCaseLetter && password.length >= 8)
+        notValid = false;
+        
+      if (notValid)
+        return {
+          requiredPattern: passowrdPattern
+        };
+
+      return null;
+    }
+  };
+};
 export const validNamePatter = () => {
   return function(control: FormControl) {
     const name = control.value;
     const pattern = /^([a-zA-z\s]{1,30})$/g;
 
-    if(name) {
+    if (name) {
       if (!pattern.test(name)) {
         return {
           invalidPattern: true

@@ -13,6 +13,7 @@ import { authLoading, loginErrorState } from "../../selectors";
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
+  loginSubmited = false;
   loginError$: Observable<null | string>;
   authLoading$: Observable<boolean>;
   constructor(private store: Store<AppState>) {
@@ -22,14 +23,19 @@ export class LoginFormComponent implements OnInit {
     this.authLoading$ = this.store.select(authLoading);
 
     this.loginForm = new FormGroup({
-      email: new FormControl("", Validators.compose([Validators.required])),
+      email: new FormControl("", Validators.compose([Validators.required, Validators.email])),
       password: new FormControl("", Validators.compose([Validators.required]))
     });
   }
 
   ngOnInit() {}
 
+  get loginFormControls() {
+    return this.loginForm.controls;
+  }
+
   login() {
+    this.loginSubmited = true;
     if (this.loginForm.valid) {
       const data = this.loginForm.value;
       this.store.dispatch(new AuthLoading());

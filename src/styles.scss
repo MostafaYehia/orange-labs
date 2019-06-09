@@ -114,12 +114,25 @@ body {
     }
   }
 
+  .message {
+    display: block;
+    margin: 5px 0;
+    font-size: 0.7rem;
+    &.success {
+      color: green;
+    }
+
+    &.error {
+      color: lightcoral;
+    }
+  }
+
   .ng-valid.ng-dirty:not(form) {
     border: solid 1px lightgreen;
   }
-  
-  .ng-invalid.ng-dirty:not(form), .ng-invalid:not(form).form-submitted {
+
+  .ng-invalid.ng-dirty:not(form),
+  .ng-invalid:not(form).form-submitted {
     border: solid 1px lightcoral;
   }
-
 }

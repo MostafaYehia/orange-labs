@@ -7,15 +7,4 @@
     width: 100%;
   }
 
-  .message {
-    display: block;
-    margin: 5px;
-    &.success {
-      color: green;
-    }
-
-    &.error {
-      color: red;
-    }
-  }
 }
