@@ -13,18 +13,37 @@
     top: -2px;
   }
 
-  .contact__name {
+  .contact__head {
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
     position: absolute;
     left: -5px;
 
-    span {
-      align-self: flex-start;
+    .contact__avatar__wrapper {
       display: inline-block;
-      padding: 2px 5px;
-      background: #ff6600;
-      color: white;
+      position: relative;
+      margin: 10px auto 15px auto;
+      --size: 40px;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: top center;
+      overflow: hidden;
+    }
+
+    .contact__name {
+      display: flex;
+      flex-flow: column;
+      left: -5px;
+      span {
+        align-self: flex-start;
+        display: inline-block;
+        padding: 2px 5px;
+        background: #ff6600;
+        color: white;
+      }
     }
   }
 
@@ -71,6 +90,4 @@
       margin-bottom: 5px;
     }
   }
-
-
 }

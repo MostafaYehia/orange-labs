@@ -27,7 +27,7 @@
   </button>
 </div>
 <!-- Pagination -->
-<div class="pagination__wrapper">
+<div class="pagination__wrapper" *ngIf="totalPages > 1">
   <small class="page__counter">{{ currentPage }} of {{ totalPages }}</small>
   <button class="btn pagination__btn" (click)="prevPage()">
     <i class="icon ion-md-arrow-dropleft"></i>
@@ -36,12 +36,21 @@
     <i class="icon ion-md-arrow-dropright"></i>
   </button>
 </div>
-<div class="contacts__wrapper" [@showContactsAnim]="contacts.length">
+<div
+  class="contacts__wrapper"
+  *ngIf="contacts.length; else noContacts"
+  [@showContactsAnim]="contacts.length"
+>
   <app-contact
     *ngFor="let contact of contacts"
     [contact]="contact"
   ></app-contact>
 </div>
+<ng-template #noContacts>
+  <div class="no__contacts__message">
+    <p (click)="addContactModal.open()">You have no contacts, start adding</p>
+  </div>
+</ng-template>
 
 <ngx-smart-modal #addContactModal identifier="addContactModal">
   <app-add-contact-form></app-add-contact-form>

@@ -1,13 +1,15 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ContactsApiService } from "../../services/contacts-api.service";
 import { AppState } from "src/app/ngrx-store/reducers";
 import { Store } from "@ngrx/store";
 import { requiredFileTypes } from "src/app/shared/validators";
 import { map, catchError } from "rxjs/operators";
-import { of } from "rxjs";
+import { of, Observable, Subscription } from "rxjs";
 import { ChangeDetectionStrategy } from "@angular/core";
 import * as fromContacts from "../../actions/contact.actions";
+import { getContactsErrors } from "../../selectors";
+import { NgxSmartModalService } from "ngx-smart-modal";
 
 @Component({
   selector: "app-edit-contact-form",
@@ -15,17 +17,29 @@ import * as fromContacts from "../../actions/contact.actions";
   styleUrls: ["./edit-contact-form.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditContactFormComponent implements OnInit {
+export class EditContactFormComponent implements OnInit, OnDestroy {
   editContactForm: FormGroup;
+  error: Observable<any>;
+  editAvatar;
   @Input() contact = {};
+
   editContactSubmited = false;
-  updateMessage = {
-    type: "success",
-    body: ""
-  };
-  constructor(private store: Store<AppState>) {}
+  updateErrorMessage$: Observable<null | string>;
+  subs: Subscription[] = [];
+  constructor(
+    private store: Store<AppState>,
+    public ngxSmartModalService: NgxSmartModalService,
+    private cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
+    // Get conatct edit error
+    this.updateErrorMessage$ = this.store.select(getContactsErrors);
+
+
+    // Store edit avatar
+    this.editAvatar = this.contact['avatars'].medium;
+
     this.editContactForm = new FormGroup({
       avatar: new FormControl("", requiredFileTypes(["png", "jpg", "jpeg"])),
       firstName: new FormControl(
@@ -69,7 +83,6 @@ export class EditContactFormComponent implements OnInit {
   editContact() {
     this.editContactSubmited = true;
     if (this.editContactForm.valid) {
-      this.updateMessage.body = null;
       const formData = new FormData();
       const editFormControls = this.editContactForm.controls;
 
@@ -78,15 +91,36 @@ export class EditContactFormComponent implements OnInit {
         formData.append(key, value);
       });
 
-      this.store.dispatch(new fromContacts.UpdateContact(this.contact["_id"]));
+      this.store.dispatch(
+        new fromContacts.UpdateContact({
+          id: this.contact["_id"],
+          data: formData
+        })
+      );
     }
   }
 
   onAvatarSelect(event) {
     if (event.target.files.length > 0) {
-      this.updateMessage.body = "";
+      this.store.dispatch(new fromContacts.ContactsError(null));
       const file = event.target.files[0];
-      this.editContactForm.get("avatar").setValue(file);
+      const reader = new FileReader();
+
+      reader.onload = ev => {
+        this.editAvatar = ev.target['result'];
+        this.cd.detectChanges();
+        this.editContactForm.get("avatar").setValue(file);
+      };
+
+      reader.readAsDataURL(file);
     }
+  }
+
+  openEditModal() {
+    this.ngxSmartModalService.get("editContactModal").open();
+  }
+
+  ngOnDestroy() {
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 }

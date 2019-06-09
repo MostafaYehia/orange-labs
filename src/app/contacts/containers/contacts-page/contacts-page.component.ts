@@ -49,10 +49,7 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
     this.subs.push(
       // Get Contacts
       this.store.select(getAllContacts).subscribe(contacts => {
-        this.contacts = [];
-        setTimeout(() => {
-          this.contacts = [...contacts];
-        }, 0);
+        this.contacts = [...contacts];
       })
     );
 

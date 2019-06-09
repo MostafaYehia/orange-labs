@@ -11,7 +11,7 @@ import { AuthRoutingModule } from "./auth-routing.module";
 
 // NgRx
 import { reducer } from "./reducers/auth.reducer";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 
 // Containers
@@ -21,6 +21,8 @@ import { SignupComponent } from "./containers/signup/signup.component";
 // Components
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { SignupFormComponent } from "./components/signup-form/signup-form.component";
+import { SharedModule } from '../shared/shared.module';
+import { AuthorizationInterceptorService } from './interceptors/authorization-interceptor.service';
 
 const COMPONENTS = [
   LoginComponent,
@@ -36,6 +38,7 @@ const COMPONENTS = [
     AuthRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule,
     StoreModule.forFeature("auth", reducer),
     EffectsModule.forFeature([AuthEffects])
   ],

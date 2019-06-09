@@ -36,6 +36,7 @@ export class ContactEffects {
       return this.contactsApi.createContact(action.payload.contact).pipe(
         switchMap((res: any) => {
           console.log("Contact has been added successfully!");
+          // Show notification
           this.ngxSmartModalService.get("addContactModal").close();
           return [
             new fromContacts.ContactAdded({ contact: res.contact }),
@@ -43,8 +44,7 @@ export class ContactEffects {
           ];
         }),
         catchError(err => {
-          console.log(err)
-          return of(new fromContacts.ContactsError(err));
+          return of(new fromContacts.ContactsError(err.error.message));
         })
       );
     })
@@ -55,14 +55,31 @@ export class ContactEffects {
   updateContact$: Observable<Action> = this.actions$.pipe(
     ofType(fromContacts.ContactActionTypes.UpdateContact),
     switchMap((action: fromContacts.UpdateContact) => {
-      const { contact } = action.payload;
-      return this.contactsApi.editContact(contact.id, action.payload).pipe(
-        map((res: any) => {
+      const { id, data } = action.payload;
+
+      console.log("Send this data: ", data);
+      // Remove _id before sending
+      return this.contactsApi.editContact(id, data).pipe(
+        switchMap((res: any) => {
           console.log("Contact has been updated successfully!");
-          return new fromContacts.ContactUpdated({ contact: res.contact });
+
+
+          console.log("id Before", id)
+          console.log("id after", res.contact._id)
+          // Show notification
+          return [
+            new fromContacts.ContactUpdated({
+              contact: {
+                changes: res.contact,
+                id: res.contact._id
+              }
+            }),
+            new fromContacts.ContactsError(null)
+          ];
         }),
         catchError(err => {
-          return of(new fromContacts.ContactsError(err));
+          console.log("err", err);
+          return of(new fromContacts.ContactsError(err.error.message));
         })
       );
     })
@@ -74,11 +91,16 @@ export class ContactEffects {
     ofType(fromContacts.ContactActionTypes.DeleteContact),
     switchMap((action: fromContacts.DeleteContact) => {
       return this.contactsApi.deleteContact(action.payload).pipe(
-        map((res: any) => {
-          return new fromContacts.TotalPages(res.totalPages);
+        switchMap((res: any) => {
+          // Show notification
+          return [
+            new fromContacts.ContactDeleted({ id: `${action.payload}` }),
+            new fromContacts.TotalPages(res.totalPages)
+          ];
         }),
         catchError(err => {
-          return of(new fromContacts.ContactsError(err));
+          console.log("err", err);
+          return of(new fromContacts.ContactsError(err.erro.message));
         })
       );
     })

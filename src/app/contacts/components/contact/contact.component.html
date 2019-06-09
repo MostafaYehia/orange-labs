@@ -1,8 +1,15 @@
 <div class="contact">
-  <label class="contact__name" for="contact__name"
-    ><span>{{ contact.firstName }}</span>
-    <span>{{ contact.lastName }}</span></label
-  >
+  <div class="contact__head" for="contact__name">
+    <!-- Avatar -->
+    <div
+      class="contact__avatar__wrapper"
+      [ngStyle]="{ backgroundImage: 'url(' + contact?.avatars?.small + ')' }"
+    ></div>
+    <div class="contact__name">
+      <span>{{ contact.firstName }}</span>
+      <span>{{ contact.lastName }}</span>
+    </div>
+  </div>
   <div class="contact__details__wrapper">
     <label for="contact__email"><span>email</span> {{ contact.email }}</label>
     <label for="contact__phone"><span>phone</span> {{ contact.phone }}</label>
@@ -10,9 +17,13 @@
 
   <div class="contact__controls__wrapper">
     <i class="icon ion-md-create edit" (click)="editContactModal.open()"></i>
-    <i class="icon ion-md-close delete" (click)="deleteContact()"></i>
+    <i
+      class="icon ion-md-close delete"
+      (click)="deleteContact(contact._id)"
+    ></i>
   </div>
-  <ngx-smart-modal #editContactModal identifier="editContactModal">
-    <app-edit-contact-form [contact]="contact"></app-edit-contact-form>
-  </ngx-smart-modal>
 </div>
+
+<ngx-smart-modal #editContactModal identifier="editContactModal">
+  <app-edit-contact-form [contact]="contact"></app-edit-contact-form>
+</ngx-smart-modal>

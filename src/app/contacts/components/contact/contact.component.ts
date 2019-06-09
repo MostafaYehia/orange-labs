@@ -3,8 +3,10 @@ import { ContactsApiService } from "../../services/contacts-api.service";
 import { NgxSmartModalService } from "ngx-smart-modal";
 import { catchError, map } from "rxjs/operators";
 import { of } from "rxjs";
-import { ChangeDetectionStrategy } from '@angular/core';
-
+import { ChangeDetectionStrategy } from "@angular/core";
+import { AppState } from "src/app/ngrx-store/reducers";
+import { Store } from "@ngrx/store";
+import * as fromContacts from "../../actions/contact.actions";
 @Component({
   selector: "app-contact",
   templateUrl: "./contact.component.html",
@@ -12,34 +14,16 @@ import { ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactComponent implements OnInit {
-
   @Input() contact = {};
 
   constructor(
     public ngxSmartModalService: NgxSmartModalService,
-    private contactsApi: ContactsApiService
+    private store: Store<AppState>
   ) {}
 
+  ngOnInit() {}
 
-  ngOnInit() {
-  
-  }
-
-
-  deleteContact() {
-    const sub = this.contactsApi
-      .deleteContact(this.contact["_id"])
-      .pipe(
-        map((res: any) => {
-          console.log("Contact has been deleted successfully");
-        }),
-        catchError(err => {
-          console.log("Deleteing contact erro", err);
-          return of(err);
-        })
-      )
-      .subscribe((res: any) => {
-        sub.unsubscribe();
-      });
+  deleteContact(id) {
+    this.store.dispatch(new fromContacts.DeleteContact(id));
   }
 }

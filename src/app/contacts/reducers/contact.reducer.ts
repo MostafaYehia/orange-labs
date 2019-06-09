@@ -53,6 +53,10 @@ export function reducer(
       return { ...state, sortBy: action.payload };
     }
 
+    case ContactActionTypes.ContactsError: {
+      return {...state, error: action.payload}
+    }
+
     default: {
       return state;
     }

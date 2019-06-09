@@ -15,6 +15,13 @@ export const getCurrentPage = createSelector(
   (state: ContactsState) => state.currentPage
 );
 
+
+// Get Contact Errors
+export const getContactsErrors = createSelector(
+  contactsState,
+  (state: ContactsState) => state.error
+);
+
 // Get Sort state
 export const getSortBy = createSelector(
   contactsState,

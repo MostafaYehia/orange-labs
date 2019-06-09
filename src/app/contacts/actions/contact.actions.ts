@@ -20,7 +20,7 @@ export enum ContactActionTypes {
 export class LoadContacts implements Action {
   readonly type = ContactActionTypes.LoadContacts;
 
-  constructor(public payload: number ) {}
+  constructor(public payload: number) {}
 }
 
 export class AddContact implements Action {
@@ -35,18 +35,16 @@ export class ContactAdded implements Action {
   constructor(public payload: { contact: Contact }) {}
 }
 
-
 export class AddContacts implements Action {
   readonly type = ContactActionTypes.AddContacts;
 
   constructor(public payload: { contacts: Contact[] }) {}
 }
 
-
 export class UpdateContact implements Action {
   readonly type = ContactActionTypes.UpdateContact;
 
-  constructor(public payload: { contact: Update<Contact> }) {}
+  constructor(public payload: { id: string; data: any }) {}
 }
 
 export class ContactUpdated implements Action {
@@ -67,27 +65,24 @@ export class ContactDeleted implements Action {
   constructor(public payload: { id: string }) {}
 }
 
-
 export class CurrentPage implements Action {
   readonly type = ContactActionTypes.CurrentPage;
-  constructor(public payload: number ) {}
-
+  constructor(public payload: number) {}
 }
 
 export class TotalPages implements Action {
   readonly type = ContactActionTypes.TotalPages;
-  constructor(public payload: number ) {}
-
+  constructor(public payload: number) {}
 }
 
 export class SortType implements Action {
   readonly type = ContactActionTypes.SortType;
-  constructor(public payload: string ) {}
+  constructor(public payload: string) {}
 }
 
 export class ContactsError implements Action {
-  readonly type = ContactActionTypes.SortType;
-  constructor(public payload: string ) {}
+  readonly type = ContactActionTypes.ContactsError;
+  constructor(public payload: string) {}
 }
 
 export type ContactActions =
@@ -102,4 +97,4 @@ export type ContactActions =
   | CurrentPage
   | TotalPages
   | SortType
-  | ContactsError
+  | ContactsError;

@@ -18,6 +18,8 @@ import { EffectsModule } from "@ngrx/effects";
 import { ContactEffects } from "./effects/contact.effects";
 import { AddContactFormComponent } from "./components/add-contact-form/add-contact-form.component";
 import { EditContactFormComponent } from "./components/edit-contact-form/edit-contact-form.component";
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthorizationInterceptorService } from '../auth/interceptors/authorization-interceptor.service';
 
 const COMPONENTS = [
   ContactsPageComponent,
@@ -44,6 +46,13 @@ const routes: Route[] = [
     RouterModule.forChild(routes),
     StoreModule.forFeature("contact", fromContact.reducer),
     EffectsModule.forFeature([ContactEffects])
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptorService,
+      multi: true
+    }
   ],
   exports: [...COMPONENTS, RouterModule]
 })

@@ -1,5 +1,5 @@
 <h1 class="auth__title">Login</h1>
-<span class="auth__message" *ngIf="authLoading$ | async">Loading...</span>
+<app-loading-icon class="auth__message" *ngIf="authLoading$ | async"></app-loading-icon>
 <small
   class="auth__message error"
   *ngIf="loginError$ | async as errorMessage"

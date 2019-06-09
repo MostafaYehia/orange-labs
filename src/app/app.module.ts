@@ -29,6 +29,8 @@ import { SlideShowItemComponent } from "./core/components/slide-show/slide-show-
 
 // Directives
 import { SlideBlueprintDirective } from "./core/components/slide-show/slide-blueprint.directive";
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthorizationInterceptorService } from './auth/interceptors/authorization-interceptor.service';
 
 const COMPONENTS = [
   AppComponent,
@@ -59,7 +61,6 @@ const COMPONENTS = [
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     NgxSmartModalModule.forRoot()
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

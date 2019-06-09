@@ -3,7 +3,7 @@
   <!-- Avatar -->
   <div
     class="form__group contact__avatar__wrapper"
-    [ngStyle]="{ backgroundImage: 'url(' + contact?.avatars?.medium + ')' }"
+    [ngStyle]="{ backgroundImage: 'url(' + editAvatar + ')' }"
   >
     <input type="file" name="avatar" (change)="onAvatarSelect($event)" />
     <button class="btn upload__btn">Change</button>
@@ -15,15 +15,7 @@
       >only jpg,jpeg and png</small
     >
   </ng-container>
-  <small
-    class="message"
-    [ngClass]="{
-      success: updateMessage.type == 'success',
-      error: updateMessage.type == 'error'
-    }"
-    *ngIf="updateMessage.body"
-    >{{ updateMessage.body }}</small
-  >
+  <small *ngIf="updateErrorMessage$ | async as errorMessage" class="message error">{{errorMessage}}</small>
 
   <!-- First Name -->
   <div class="form__group">
@@ -55,7 +47,6 @@
       type="text"
       name="edit_lastName"
       maxlength="30"
-
       placeholder="Enter your last name"
       formControlName="lastName"
     />
@@ -114,8 +105,7 @@
       <small
         class="message error"
         *ngIf="
-          editFormControls.phone.dirty &&
-          editFormControls.phone.errors?.pattern
+          editFormControls.phone.dirty && editFormControls.phone.errors?.pattern
         "
         >Invalid phone number</small
       >
