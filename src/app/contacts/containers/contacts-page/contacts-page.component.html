@@ -2,19 +2,39 @@
   <!-- Sort options -->
   <div class="sort__list">
     <small>Sort: </small>
-    <button class="btn" (click)="sortBy = 'firstName'; sortContacts()" [ngClass]="{'active': sortBy == 'firstName'}">First Name</button>
-    <button class="btn" (click)="sortBy = 'lastName'; sortContacts()"  [ngClass]="{'active': sortBy == 'lastName'}">Last Name</button>
+    <button
+      class="btn"
+      (click)="sortBy = 'firstName'; sortContacts()"
+      [ngClass]="{ active: sortBy == 'firstName' }"
+    >
+      First Name
+    </button>
+    <button
+      class="btn"
+      (click)="sortBy = 'lastName'; sortContacts()"
+      [ngClass]="{ active: sortBy == 'lastName' }"
+    >
+      Last Name
+    </button>
   </div>
   <!-- Add new Contact -->
-  <button class="btn brand__btn new__contact__btn" (click)="addContactModal.open()">
+  <button
+    class="btn brand__btn new__contact__btn"
+    (click)="addContactModal.open()"
+  >
     <i class="icon ion-md-add edit"></i>
     Add new contact
   </button>
-  <!-- Pagination -->
-  <div class="pagination__wrapper">
-    <button class="btn pagination__btn"><i class="icon ion-md-arrow-dropleft"></i></button>
-    <button class="btn pagination__btn  "><i class="icon ion-md-arrow-dropright"></i></button>
-  </div>
+</div>
+<!-- Pagination -->
+<div class="pagination__wrapper">
+    <small class="page__counter">{{currentPage}} of {{totalPages}}</small>
+  <button class="btn pagination__btn" (click)="prevPage()">
+    <i class="icon ion-md-arrow-dropleft"></i>
+  </button>
+  <button class="btn pagination__btn" (click)="nextPage()">
+    <i class="icon ion-md-arrow-dropright"></i>
+  </button>
 </div>
 <div class="contacts__wrapper">
   <app-contact

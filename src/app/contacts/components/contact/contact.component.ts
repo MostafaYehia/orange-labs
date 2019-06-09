@@ -5,11 +5,13 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { catchError, map } from "rxjs/operators";
 import { of } from "rxjs";
 import { requiredFileTypes } from "src/app/shared/validators";
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: "app-contact",
   templateUrl: "./contact.component.html",
-  styleUrls: ["./contact.component.scss"]
+  styleUrls: ["./contact.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactComponent implements OnInit, AfterViewInit {
   editContactForm: FormGroup;

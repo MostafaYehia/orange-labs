@@ -18,7 +18,7 @@
       <!-- Avatar -->
       <div
         class="form__group contact__avatar__wrapper"
-        [ngStyle]="{ backgroundImage: 'url(' + contact.avatars.medium + ')' }"
+        [ngStyle]="{ backgroundImage: 'url(' + contact?.avatars?.medium + ')' }"
       >
         <input type="file" name="avatar" (change)="onAvatarSelect($event)" />
         <button class="btn upload__btn">Change</button>

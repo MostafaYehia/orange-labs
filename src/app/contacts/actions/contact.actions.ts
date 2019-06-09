@@ -1,24 +1,26 @@
-import { Action } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
-import { Contact } from '../models/contact.model';
+import { Action } from "@ngrx/store";
+import { Update } from "@ngrx/entity";
+import { Contact } from "../models/contact.model";
 
 export enum ContactActionTypes {
-  LoadContacts = '[Contact] Load Contacts',
-  AddContact = '[Contact] Add Contact',
-  UpsertContact = '[Contact] Upsert Contact',
-  AddContacts = '[Contact] Add Contacts',
-  UpsertContacts = '[Contact] Upsert Contacts',
-  UpdateContact = '[Contact] Update Contact',
-  UpdateContacts = '[Contact] Update Contacts',
-  DeleteContact = '[Contact] Delete Contact',
-  DeleteContacts = '[Contact] Delete Contacts',
-  ClearContacts = '[Contact] Clear Contacts'
+  LoadContacts = "[Contact] Load Contacts",
+  AddContact = "[Contact] Add Contact",
+  ContactAdded = "[Contact] Contact Added",
+  AddContacts = "[Contact] Add Contacts",
+  UpdateContact = "[Contact] Update Contact",
+  ContactUpdated = "[Contact] Contact Updated",
+  DeleteContact = "[Contact] Delete Contact",
+  ContactDeleted = "[Contact] Contact Deleted",
+  CurrentPage = "[Contact] Set Page",
+  TotalPages = "[Contact] Set Total Pages Count",
+  SortType = "[Contact] Set Sort Type",
+  ContactsError = "[Contact] Error"
 }
 
 export class LoadContacts implements Action {
   readonly type = ContactActionTypes.LoadContacts;
 
-  constructor(public payload: { contacts: Contact[] }) {}
+  constructor(public payload: number ) {}
 }
 
 export class AddContact implements Action {
@@ -27,11 +29,12 @@ export class AddContact implements Action {
   constructor(public payload: { contact: Contact }) {}
 }
 
-export class UpsertContact implements Action {
-  readonly type = ContactActionTypes.UpsertContact;
+export class ContactAdded implements Action {
+  readonly type = ContactActionTypes.ContactAdded;
 
   constructor(public payload: { contact: Contact }) {}
 }
+
 
 export class AddContacts implements Action {
   readonly type = ContactActionTypes.AddContacts;
@@ -39,11 +42,6 @@ export class AddContacts implements Action {
   constructor(public payload: { contacts: Contact[] }) {}
 }
 
-export class UpsertContacts implements Action {
-  readonly type = ContactActionTypes.UpsertContacts;
-
-  constructor(public payload: { contacts: Contact[] }) {}
-}
 
 export class UpdateContact implements Action {
   readonly type = ContactActionTypes.UpdateContact;
@@ -51,10 +49,10 @@ export class UpdateContact implements Action {
   constructor(public payload: { contact: Update<Contact> }) {}
 }
 
-export class UpdateContacts implements Action {
-  readonly type = ContactActionTypes.UpdateContacts;
+export class ContactUpdated implements Action {
+  readonly type = ContactActionTypes.ContactUpdated;
 
-  constructor(public payload: { contacts: Update<Contact>[] }) {}
+  constructor(public payload: { contact: Update<Contact> }) {}
 }
 
 export class DeleteContact implements Action {
@@ -63,24 +61,45 @@ export class DeleteContact implements Action {
   constructor(public payload: { id: string }) {}
 }
 
-export class DeleteContacts implements Action {
-  readonly type = ContactActionTypes.DeleteContacts;
+export class ContactDeleted implements Action {
+  readonly type = ContactActionTypes.ContactDeleted;
 
-  constructor(public payload: { ids: string[] }) {}
+  constructor(public payload: { id: string }) {}
 }
 
-export class ClearContacts implements Action {
-  readonly type = ContactActionTypes.ClearContacts;
+
+export class CurrentPage implements Action {
+  readonly type = ContactActionTypes.CurrentPage;
+  constructor(public payload: number ) {}
+
+}
+
+export class TotalPages implements Action {
+  readonly type = ContactActionTypes.TotalPages;
+  constructor(public payload: number ) {}
+
+}
+
+export class SortType implements Action {
+  readonly type = ContactActionTypes.SortType;
+  constructor(public payload: string ) {}
+}
+
+export class ContactsError implements Action {
+  readonly type = ContactActionTypes.SortType;
+  constructor(public payload: string ) {}
 }
 
 export type ContactActions =
- LoadContacts
- | AddContact
- | UpsertContact
- | AddContacts
- | UpsertContacts
- | UpdateContact
- | UpdateContacts
- | DeleteContact
- | DeleteContacts
- | ClearContacts;
+  | LoadContacts
+  | AddContact
+  | ContactAdded
+  | AddContacts
+  | UpdateContact
+  | ContactUpdated
+  | DeleteContact
+  | ContactDeleted
+  | CurrentPage
+  | TotalPages
+  | SortType
+  | ContactsError

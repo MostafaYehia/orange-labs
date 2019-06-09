@@ -12,6 +12,7 @@ import { Subscription } from "rxjs";
 })
 export class ContactsApiService implements OnDestroy {
   baseContactsUrl;
+  loadedPages = [];
   subs: Subscription[] = [];
   headers = {};
 
@@ -30,16 +31,14 @@ export class ContactsApiService implements OnDestroy {
     );
   }
 
-  getContacts = (page, sortTybe) => {
+  getContacts = (page) => {
     return this.http
       .get(`${this.baseContactsUrl}`, {
         headers: this.headers,
         params: {
-          page: page || 1,
-          sortBy: sortTybe || "firstName"
+          page: page || 1
         }
-      })
-      .pipe(map((res: any) => res.contacts));
+      });
   };
 
   getSingleContact = id => {

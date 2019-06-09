@@ -39,10 +39,12 @@ export class AuthEffects {
       return this.authApi.checkAuth(token).pipe(
         map(res => {
           // Store new backend user state
+
           const newData = {
             token,
             user: { ...user, isVerified: res.isVerified }
           };
+
           this.secureStorage.storeItem(this.userDataKey, newData);
           return new LoginSuccess(newData);
         }),

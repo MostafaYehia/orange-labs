@@ -1,21 +1,20 @@
 :host {
-  display: block;
+  display: flex;
+  flex-flow: column nowrap;
   background: white;
-  width: 100%;
+  width: 70%;
+  margin: auto;
 
   .contacts__controllers {
-    display: grid;
-    grid-template-columns: minmax(auto, 200px) auto minmax(100px, 200px);
+    display: flex;
     justify-content: space-between;
     align-items: center;
     background: #ff6600;
     padding: 10px;
-    width: 70%;
+    width: 100%;
     border-radius: 0.5rem;
-    margin: auto;
 
     .new__contact__btn {
-
       &:hover {
         background: #fd7d27;
       }
@@ -46,24 +45,36 @@
         }
       }
     }
+  }
 
-    .pagination__wrapper {
-      border-radius: 3px;
-      overflow: hidden;
-      justify-self: flex-end;
+  .pagination__wrapper {
+    border-radius: 3px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    z-index: 1;
+    user-select: none;
 
-      button {
-        background: rgb(221, 221, 221);
-        font-size: 1rem;
-        min-width: 30px;
+    .page__counter {
+      position: relative;
+      top: 5px;
+      margin-right: 5px;
+    }
 
-        &:hover {
-          background: white;
-        }
+    .pagination__btn {
+      background: none;
+      font-size: 1rem;
+      min-width: 10px;
 
-        &:active {
-          background: rgb(199, 199, 199);
-        }
+
+
+      &:hover > i {
+        color: #ff6600;
+      }
+
+      &:active > i {
+        color: #e95d00;
       }
     }
   }
@@ -72,7 +83,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     grid-gap: 1rem;
-    width: 70%;
+    width: 100%;
     margin: 50px auto;
   }
 
@@ -87,6 +98,7 @@
       color: red;
     }
   }
+
   .add__btn {
     display: block;
     border-color: green;

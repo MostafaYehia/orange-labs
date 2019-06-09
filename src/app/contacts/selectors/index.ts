@@ -1,7 +1,13 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { ContactsState, selectIds, selectEntities, selectAll } from "../reducers/contact.reducer";
+import {
+  ContactsState,
+  selectIds,
+  selectEntities,
+  selectAll
+} from "../reducers/contact.reducer";
+import { Contact } from "../models/contact.model";
 
-const contactsState = createFeatureSelector<ContactsState>("contacts");
+const contactsState = createFeatureSelector<ContactsState>("contact");
 
 // Get Current Page
 export const getCurrentPage = createSelector(
@@ -9,13 +15,11 @@ export const getCurrentPage = createSelector(
   (state: ContactsState) => state.currentPage
 );
 
-
 // Get Sort state
 export const getSortBy = createSelector(
   contactsState,
   (state: ContactsState) => state.sortBy
 );
-
 
 // Get total pages count
 export const getTotalPagesCount = createSelector(
@@ -32,5 +36,21 @@ export const getContactEntities = createSelector(
 // Get All Contacts
 export const getAllContacts = createSelector(
   contactsState,
-  selectAll
+  getSortBy,
+  getCurrentPage,
+  (state: ContactsState, sortType: string, currentPage: number): Contact[] => {
+    const result = [];
+    const contacts = state.entities;
+
+    if (contacts) {
+      let ids: string[] | number[]  = state.ids;
+      let skip = ids.length <= 10 ? 0 : (currentPage - 1) * 10;
+      const skipped = state.ids.slice(skip, skip + 10);
+      for (const id of skipped) {
+        result.push(contacts[id]);
+      }
+    }
+
+    return result.sort((a, b) => (a[sortType] > b[sortType] ? 1 : -1));
+  }
 );

@@ -7,6 +7,7 @@ export interface ContactsState extends EntityState<Contact> {
   currentPage: number;
   totalPages: number;
   sortBy: string;
+  error: string | null;
 }
 
 export const adapter: EntityAdapter<Contact> = createEntityAdapter<Contact>();
@@ -15,49 +16,41 @@ export const initialState: ContactsState = adapter.getInitialState({
   // additional entity state properties
   currentPage: 1,
   totalPages: 10,
-  sortBy: "firstName"
+  sortBy: "firstName",
+  error: null
 });
 
-export function reducer(state = initialState, action: ContactActions): ContactsState {
+export function reducer(
+  state = initialState,
+  action: ContactActions
+): ContactsState {
   switch (action.type) {
-    case ContactActionTypes.AddContact: {
+    case ContactActionTypes.ContactAdded: {
       return adapter.addOne(action.payload.contact, state);
-    }
-
-    case ContactActionTypes.UpsertContact: {
-      return adapter.upsertOne(action.payload.contact, state);
     }
 
     case ContactActionTypes.AddContacts: {
       return adapter.addMany(action.payload.contacts, state);
     }
 
-    case ContactActionTypes.UpsertContacts: {
-      return adapter.upsertMany(action.payload.contacts, state);
-    }
-
-    case ContactActionTypes.UpdateContact: {
+    case ContactActionTypes.ContactUpdated: {
       return adapter.updateOne(action.payload.contact, state);
     }
 
-    case ContactActionTypes.UpdateContacts: {
-      return adapter.updateMany(action.payload.contacts, state);
-    }
-
-    case ContactActionTypes.DeleteContact: {
+    case ContactActionTypes.ContactDeleted: {
       return adapter.removeOne(action.payload.id, state);
     }
 
-    case ContactActionTypes.DeleteContacts: {
-      return adapter.removeMany(action.payload.ids, state);
+    case ContactActionTypes.CurrentPage: {
+      return { ...state, currentPage: action.payload };
     }
 
-    case ContactActionTypes.LoadContacts: {
-      return adapter.addAll(action.payload.contacts, state);
+    case ContactActionTypes.TotalPages: {
+      return { ...state, totalPages: action.payload };
     }
 
-    case ContactActionTypes.ClearContacts: {
-      return adapter.removeAll(state);
+    case ContactActionTypes.SortType: {
+      return { ...state, sortBy: action.payload };
     }
 
     default: {
